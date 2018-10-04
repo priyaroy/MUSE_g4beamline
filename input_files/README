@@ -16,4 +16,8 @@ About the input files:
    I have changed the beam line element positions so that they match the current position values 
    (referred to as 'adopted' values by Ron Gilman) used in Turtle. 
    
+4) Not included in the 'input_files' folder is a fieldmap file for the dipole magnets, because the file size 
+   is bigger than 25 MB. Please take this file (ASM.g4blmap) from Paul Reimer or Priyashree Roy.
+   
+   
    
