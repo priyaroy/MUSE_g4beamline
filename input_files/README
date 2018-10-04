@@ -1,1 +1,19 @@
+************************************************************************
+PRoy (4 Oct 2018):
 
+About the input files:
+
+1) MuSEDraw_fromPAul_Reimer_2Sept2018.g4bl is the file I received from Paul Reimer on Sept 2, 2018.
+
+2) MuSEDraw.g4bl file is an update of the MuSEDraw_fromPAul_Reimer_2Sept2018.g4bl file with the following 
+   corrections:
+   
+  a) LQSL = 600 mm (to match Turtle old input)
+  b) Grad of magnetic fields corrected: should be gradient wrt radius and not length
+  c) QSL15 (B) gradient was not defined in the previous version. I added that. 
+  
+3) MuSEDraw_new_changes_3Oct2018_adopted_turtle_values.g4bl is an update of the MuSEDraw.g4bl file. In this,
+   I have changed the beam line element positions so that they match the current position values 
+   (referred to as 'adopted' values by Ron Gilman) used in Turtle. 
+   
+   
