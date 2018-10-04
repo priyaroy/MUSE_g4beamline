@@ -1,3 +1,14 @@
 Priyashree Roy (Oct 1, 2018):
 
-This directory contains the code to read the output rootfile containing ntuples from g4beamline simulation and create histograms, canvases etc. The code "analysis.cc" is the main code which calls other subroutines to perform various jobs with the ultimate goal of creating histograms. 
+This directory contains the code to read the output rootfile 
+containing ntuples from g4beamline simulation and 
+create histograms, canvases etc. The code "analysis.cc" is 
+the main code which calls other subroutines to perform various 
+jobs with the ultimate goal of creating histograms.
+
+To compile: $cd <code_dir>
+            $make clean; make 
+            
+To execute: $./analysis1
+
+
