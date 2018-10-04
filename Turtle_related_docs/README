@@ -5,7 +5,7 @@ This folder contains information about the properties of beam elements
 (positions, magnetic length etc) as used in Turtle simulation. 
 
 1) PiM1ElementPositions.xlsx compares actual properties of beam elements with those used in Turtle. The last 
-four columns with the word 'adopted' show the currently used values by Turtle. 
+four columns with the word 'adopted' show the currently used values in Turtle. 
 
 2) TurtleInput.dat file is an input file used for Turtle. Version unknown.
 
