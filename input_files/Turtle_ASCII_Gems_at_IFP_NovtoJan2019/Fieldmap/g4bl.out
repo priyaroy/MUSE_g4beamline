@@ -1,0 +1,720 @@
+Error: cannot open file "iostream"  (tmpfile):2:
+*** Interpreter error recovered ***
+G4BL_DIR=/home/priyaroy/Documents/G4beamline-3.04
+G4beamline Process ID 8426
+
+*************************************************************
+ g4beamline version: 3.04                        (Mar  2 2017)
+                      Copyright : Tom Roberts, Muons, Inc.
+                        License : Gnu Public License
+                            WWW : http://g4beamline.muonsinc.com
+*************************************************************
+ Geant4 version Name: geant4-10-03    (9-December-2016)
+                      Copyright : Geant4 Collaboration
+                      Reference : NIM A 506 (2003), 250-303
+                            WWW : http://cern.ch/geant4
+*************************************************************
+
+param        viewer        best,1
+geometry                   nPoints=100 printGeometry=0 visual=0
+                           tolerance=0.002
+param        firstEvent    1
+param        nEvents       100000
+param        lastEvent     100000
+param        beamPart      mu+
+param        pChannel      155
+param        pOffset       1.0
+param        scale         1
+param        fieldMap      1
+param        map1          ASM1.g4blmap
+param        map2          ASM2.g4blmap
+param        scaleDipole   1.000295
+param        scaleQSL      1
+param        scaleQT       1
+param        sepChar       _
+param        file          MuSEBeam_mu+_155_1.0
+param        histoFile     MuSEBeam_mu+_155_1.0.root
+param        physicsName   QGSP_BERT_HP
+G4PhysListFactory::GetReferencePhysList <QGSP_BERT_HP>  EMoption= 0
+<<< Geant4 Physics List simulation engine: QGSP_BERT_HP 3.0
+
+
+<<< Reference Physics List QGSP_BERT_HP is built
+
+physics      QGSP_BERT_HP  disable= inactivate= deactivate= doStochastics=1
+                           fluct=1 minRangeCut=1 list=0 gammaToMuPair=0
+                           spinTracking=0 synchrotronRadiation=0
+                           synchrotronRadiationMuon=0 maxTime=1e+06
+param        partName      mu+
+param        tuneP         155
+param        beamAngle     22.5
+param        zProdTarget   -958
+param        startZ        -958
+param        kGpmm_to_Tpm  100
+param        kGpmm2_to_Tpm2 100000
+param        RIRON         800
+param        killInPipe    0
+param        pipeColor     0,1,1,0.4
+param        killInIron    1
+param        ironColor     1,0,0,0.4
+param        absorbAllColor 1,1,0,0.05
+param        killAllColor  1,1,0,0.05
+param        killInShield  1
+param        shieldColor   1,1,0,0.05
+particlecolor              e+=1,1,1 e-=1,1,1 mu+=0,1,1 mu-=0,1,1
+trackcuts                  kill= keep=mu+ killSecondaries=0 kineticEnergyCut=0
+                           kineticEnergyMax=1.798e+308 maxTime=1e+06
+                           keepPrimaries=0 steppingVerbose=0
+collective                 deltaT=-1 format= filenamePrefix=
+param        worldMaterial Vacuum
+param        deltaChord    0.5
+param        maxstep       10
+**************************************************************************
+*** G4Exception: No radius cut
+***    severity: Warning
+***   issued by: start command
+**************************************************************************
+start                      x=0 y=0 z=0 initialZ=-958 rotation= radiusCut=0
+                           ring=0
+cornerarc                  z=-958 centerRadius=10 angle=22.5 rotation=
+                           radiusCut=0
+beam    ASCII   nEvents=2147483647 firstEvent=-1 lastEvent=2147483647 beamZ=-3700000000000000000000.0 maxR=1000000.0 renumber=0 weight=1.000000 
+		filename=g4_in.txt format=BLTrackFile 
+		
+param        MuSEDetColor  1,0,1,1
+param        MuSEDetLength 15
+param        MuSEDetRadius 500
+virtualdetector MuSEDet    radius=500 innerRadius=0 height=1000 width=1000
+                           length=15 maxStep=100 material= color=1,0,1,1
+                           noSingles=0 format= filename= file= require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+param        LQSL          590
+param        RQSL          120
+genericquad  QSL           fieldLength=590 ironLength=590 ironRadius=800
+                           apertureRadius=0 poleTipRadius=125 coilRadius=150
+                           coilHalfwidth=50 coilHalfWidth=50 gradient=0
+                           maxStep=100 ironMaterial=Fe fieldMaterial=Vacuum
+                           ironColor=1,0,0,0.4 kill=1 fringe= fringeFactor=1
+                           openAperture=0
+tubs         SHIELD        innerRadius=880 outerRadius=960 initialPhi=0
+                           finalPhi=360 length=0 maxStep=100 material=
+                           color=1,1,0,0.05 kill=1 radius=960
+param        LPole         10
+param        RPole         160
+BLFieldMap: reading file 'ASM1.g4blmap'
+fieldmap     ASM1          filename=ASM1.g4blmap file=ASM1.g4blmap current=1
+                           gradient=1 timeOffset=0
+BLFieldMap: reading file 'ASM2.g4blmap'
+fieldmap     ASM2          filename=ASM2.g4blmap file=ASM2.g4blmap current=1
+                           gradient=1 timeOffset=0
+place   SHIELD  copies=1 x=0.0 y=0.0 z=-1058.0 rename='SheildStart'
+                innerRadius=0 length=10 outerRadius=800*1.1
+place   MuSEDet copies=1 x=0.0 y=0.0 z=-943.0 rename='Det0'
+place   MuSEDet copies=1 x=0.0 y=0.0 z=-15.0 rename='Det0a'
+param        LDRIFT1       0
+param        PDRIFT1       0
+param        LQTA1         324
+param        RQTA1         75.0
+param        BQTA1         -0.9854
+param        GradQTA1      -1.3138667
+param        RIRON         500
+genericquad  QTA11         fieldLength=324 ironLength=324 ironRadius=500
+                           apertureRadius=75 poleTipRadius=0 coilRadius=0
+                           coilHalfwidth=0 coilHalfWidth=0 gradient=-1.314
+                           maxStep=100 ironMaterial=Fe fieldMaterial=Vacuum
+                           ironColor=1,0,0,0.4 kill=1 fringe= fringeFactor=1
+                           openAperture=0
+param        PQTA1         162
+place   QTA11   copies=1 x=0.0 y=0.0 z=162.0 
+param        LDRIFT2       131
+place   MuSEDet copies=1 x=0.0 y=0.0 z=397.0 rename='DetAQTA1'
+param        PDRIFT21      389.5
+param        LQTB          475
+param        RQTB          115.0
+param        BQTB1         -1.0894
+param        GradQTB1      -0.94730435
+genericquad  QTB11         fieldLength=475 ironLength=475 ironRadius=500
+                           apertureRadius=0 poleTipRadius=125 coilRadius=150
+                           coilHalfwidth=50 coilHalfWidth=50 gradient=-0.9473
+                           maxStep=100 ironMaterial=Fe fieldMaterial=Vacuum
+                           ironColor=1,0,0,0.4 kill=1 fringe= fringeFactor=1
+                           openAperture=0
+param        PQTB1         692.5
+place   QTB11   copies=1 x=0.0 y=0.0 z=692.5 
+param        LDRIFT20      110
+place   MuSEDet copies=1 x=0.0 y=0.0 z=992.5 rename='DetAQTB1'
+param        PDRIFT22      985
+param        BQTB2         1.1965
+param        GradBQTB2     1.0404348
+genericquad  QTB12         fieldLength=475 ironLength=475 ironRadius=500
+                           apertureRadius=0 poleTipRadius=125 coilRadius=150
+                           coilHalfwidth=50 coilHalfWidth=50 gradient=1.04
+                           maxStep=100 ironMaterial=Fe fieldMaterial=Vacuum
+                           ironColor=1,0,0,0.4 kill=1 fringe= fringeFactor=1
+                           openAperture=0
+param        PQTB2         1277.5
+place   QTB12   copies=1 x=0.0 y=0.0 z=1277.5 
+place   MuSEDet copies=1 x=0.0 y=0.0 z=2022.5 rename='DetAQTB2'
+param        LDRIFT3       3586
+param        PDRIFT3       3308
+param        LDRIFT4       1334
+param        PDRIFT4       5768
+place   SHIELD  copies=1 x=0.0 y=0.0 z=2634.0 rename='SHEILD_A'
+                length=5768+2500
+place   MuSEDet copies=1 x=0.0 y=0.0 z=6364.5 rename='Det1'
+param        ASMAngleDeg   75.
+param        ASMAngleRad   1.3089969
+param        L_center_line_ASM 1530.78
+param        ASMRadius     1169.4298
+cornerarc                  z=6435 centerRadius=1169 angle=37.5 rotation=
+                           radiusCut=1009
+param        PASM1         7200.39
+place   SHIELD  copies=1 x=0.0 y=0.0 z=7200.4 
+                finalPhi=60 initialPhi=-60 innerRadius=3*500 length=950
+                outerRadius=3.1*500
+param        BASM1         -0.43654351
+place   ASM1    copies=1 x=0.0 y=0.0 z=7200.4 
+                current=-0.43654351
+cornerarc                  z=7200 centerRadius=1169 angle=37.5 rotation=
+                           radiusCut=1009
+place   SHIELD  copies=1 x=0.0 y=0.0 z=7298.8 rename='sheild_bend'
+                finalPhi=295 initialPhi=65 innerRadius=2.0*500 length=4000
+                outerRadius=2.1*500
+param        LDRIFT5       1357
+param        PDRIFT5       8644.28
+param        beginCenter   7965.78
+place   MuSEDet copies=1 x=0.0 y=0.0 z=8032.3 rename='Det2'
+param        BQSL11        -1.2731
+param        GradBQSL11    -1.0609167
+param        PQSL11        9617.78
+place   QSL     copies=1 x=0.0 y=0.0 z=9617.8 rename='QSL11'
+                gradient=-1.0609167
+param        LDRIFT6       112
+param        PDRIFT6       9968.78
+param        BQSL12        0.9086
+param        GradBQSL12    0.75716667
+param        PQSL12        10319.78
+place   QSL     copies=1 x=0.0 y=0.0 z=10319.8 rename='QSL12'
+                gradient=0.75716667
+param        LDRIFT7       1010.5
+param        PDRIFT7       11120.03
+place   MuSEDet copies=1 x=0.0 y=0.0 z=11650.0 rename='Det3'
+param        LDRIFT8       512
+param        PDRIFT8       11632.78
+param        BQSL13        0.9086
+param        GradBQSL13    0.75716667
+param        PQSL13        12439.78
+place   QSL     copies=1 x=0.0 y=0.0 z=12439.8 rename='QSL13'
+                gradient=0.75716667
+param        LDRIFT9       112
+param        PDRIFT9       12790.78
+param        BQSL14        -1.2732
+param        GradBQSL14    -1.061
+param        PQSL14        13141.78
+place   QSL     copies=1 x=0.0 y=0.0 z=13141.8 rename='QSL14'
+                gradient=-1.061
+param        LDRIFT10      1311
+param        PDRIFT10      14092.28
+param        PASM2         15513.17
+place   MuSEDet copies=1 x=0.0 y=0.0 z=14718.3 rename='Det4'
+param        endCenter     14747.78
+place   SHIELD  copies=1 x=0.0 y=0.0 z=11356.8 rename='SHIELD_B'
+                length=14747.78-7965.78
+cornerarc                  z=1.475e+04 centerRadius=1169 angle=37.5 rotation=
+                           radiusCut=1009
+param        BASM2         -0.43654351
+place   ASM2    copies=1 x=0.0 y=0.0 z=15513.2 
+                current=-0.43654351
+cornerarc                  z=1.551e+04 centerRadius=1169 angle=37.5 rotation=
+                           radiusCut=1009
+place   MuSEDet copies=1 x=0.0 y=0.0 z=16288.1 rename='Det5'
+param        LDRIFT11      684
+param        BQSL15        0.544
+param        GradBQSL15    0.45333333
+param        PQSL15        17257.56
+place   QSL     copies=1 x=0.0 y=0.0 z=17257.6 rename='QSL15'
+                gradient=0.45333333
+param        BQSL16        -0.7506
+param        GradBQSL16    -0.6255
+param        LDRIFT12      112
+param        PQSL16        17959.56
+place   QSL     copies=1 x=0.0 y=0.0 z=17959.6 rename='QSL16'
+                gradient=-0.6255
+param        BQSL17        0.9086
+param        GradBQSL17    0.75716667
+param        LDRIFT13      1038
+param        PQSL17        19587.56
+place   QSL     copies=1 x=0.0 y=0.0 z=19587.6 rename='QSL17'
+                gradient=0.75716667
+param        BQSL18        -1.2732
+param        GradBQSL18    -1.061
+param        LDRIFT14      163
+param        PQSL18        20340.56
+place   QSL     copies=1 x=0.0 y=0.0 z=20340.6 rename='QSL18'
+                gradient=-1.061
+param        LDRIFT15      1536
+param        targetLocation 22159.5
+place   MuSEDet copies=1 x=0.0 y=0.0 z=21159.5 rename='DetBH'
+place   MuSEDet copies=1 x=0.0 y=0.0 z=22159.5 rename='DetTar'
+place   SHIELD  copies=1 x=0.0 y=0.0 z=22159.5 rename='SHIELD_TAR'
+                innerRadius=2*500 length=5000 outerRadius=2.1*500
+place   MuSEDet copies=1 x=0.0 y=0.0 z=23659.5 rename='DetBC1'
+place   MuSEDet copies=1 x=0.0 y=0.0 z=24659.5 rename='DetBC2'
+ntuple       partOut       category=NTuple detectors=Det* required=DetTar
+                           veto= format= filename= minHit=0 perTrack=0 union=0
+                           require=DetTar minHits=0 file=
+
+World size (before incrementing by 201.357 mm): 3100.0 H  27854.4 W  49334.0 L
+
+PARAMETERS:
+    ASMAngleDeg=75.
+    ASMAngleRad=1.3089969
+      ASMRadius=1169.4298
+          BASM1=-0.43654351
+          BASM2=-0.43654351
+         BQSL11=-1.2731
+         BQSL12=0.9086
+         BQSL13=0.9086
+         BQSL14=-1.2732
+         BQSL15=0.544
+         BQSL16=-0.7506
+         BQSL17=0.9086
+         BQSL18=-1.2732
+          BQTA1=-0.9854
+          BQTB1=-1.0894
+          BQTB2=1.1965
+     GradBQSL11=-1.0609167
+     GradBQSL12=0.75716667
+     GradBQSL13=0.75716667
+     GradBQSL14=-1.061
+     GradBQSL15=0.45333333
+     GradBQSL16=-0.6255
+     GradBQSL17=0.75716667
+     GradBQSL18=-1.061
+      GradBQTB2=1.0404348
+       GradQTA1=-1.3138667
+       GradQTB1=-0.94730435
+        LDRIFT1=0
+       LDRIFT10=1311
+       LDRIFT11=684
+       LDRIFT12=112
+       LDRIFT13=1038
+       LDRIFT14=163
+       LDRIFT15=1536
+        LDRIFT2=131
+       LDRIFT20=110
+        LDRIFT3=3586
+        LDRIFT4=1334
+        LDRIFT5=1357
+        LDRIFT6=112
+        LDRIFT7=1010.5
+        LDRIFT8=512
+        LDRIFT9=112
+          LPole=10
+           LQSL=590
+          LQTA1=324
+           LQTB=475
+L_center_line_ASM=1530.78
+   MuSEDetColor=1,0,1,1
+  MuSEDetLength=15
+  MuSEDetRadius=500
+          PASM1=7200.39
+          PASM2=15513.17
+        PDRIFT1=0
+       PDRIFT10=14092.28
+       PDRIFT21=389.5
+       PDRIFT22=985
+        PDRIFT3=3308
+        PDRIFT4=5768
+        PDRIFT5=8644.28
+        PDRIFT6=9968.78
+        PDRIFT7=11120.03
+        PDRIFT8=11632.78
+        PDRIFT9=12790.78
+         PQSL11=9617.78
+         PQSL12=10319.78
+         PQSL13=12439.78
+         PQSL14=13141.78
+         PQSL15=17257.56
+         PQSL16=17959.56
+         PQSL17=19587.56
+         PQSL18=20340.56
+          PQTA1=162
+          PQTB1=692.5
+          PQTB2=1277.5
+          RIRON=500
+          RPole=160
+           RQSL=120
+          RQTA1=75.0
+           RQTB=115.0
+            Zcl=24667
+ absorbAllColor=1,1,0,0.05
+      beamAngle=22.5
+       beamPart=mu+
+    beginCenter=7965.78
+     deltaChord=0.5
+deltaIntersection=0.1
+   deltaOneStep=0.01
+      endCenter=14747.78
+         epsMax=0.05
+         epsMin=2.5e-7
+ eventTimeLimit=30
+       fieldMap=1
+    fieldVoxels=200,200,200
+           file=MuSEBeam_mu+_155_1.0
+     firstEvent=1
+      histoFile=MuSEBeam_mu+_155_1.0.root
+    histoUpdate=0
+      ironColor=1,0,0,0.4
+ kGpmm2_to_Tpm2=100000
+   kGpmm_to_Tpm=100
+   killAllColor=1,1,0,0.05
+     killInIron=1
+     killInPipe=0
+   killInShield=1
+      lastEvent=100000
+           map1=ASM1.g4blmap
+           map2=ASM2.g4blmap
+        maxStep=100.0
+        maxstep=10
+        minStep=0.01
+        nEvents=100000
+       pChannel=155
+        pOffset=1.0
+       partName=mu+
+    physicsName=QGSP_BERT_HP
+      pipeColor=0,1,1,0.4
+          scale=1
+    scaleDipole=1.000295
+       scaleQSL=1
+        scaleQT=1
+        sepChar=_
+    shieldColor=1,1,0,0.05
+         startZ=-958
+ steppingFormat=N GLOBAL CL KE STEP VOL PROCESS
+steppingVerbose=0
+ targetLocation=22159.5
+          tuneP=155
+         viewer=best,1
+ wallClockLimit=-1
+  worldMaterial=Vacuum
+    zProdTarget=-958
+     zTolerance=2.0
+Checking overlaps for volume SheildStart ... OK! 
+BLCMDtubs::Construct SheildStart parent= relZ=-92.2 globZ=-92.2
+	zmin=-97.2 zmax=-87.2 kill=1
+Checking overlaps for volume Det0 ... OK! 
+BLCMDvirtualdetector::Construct Det0 parent= relZ=14.1 globZ=11.1
+Checking overlaps for volume Det0a ... OK! 
+BLCMDvirtualdetector::Construct Det0a parent= relZ=871.4 globZ=667.3
+Checking overlaps for volume QTA11 ... OK! 
+Checking overlaps for volume QTA11 ... OK! 
+BLCMDgenericquad::Construct QTA11 parent= relZ=1034.9 globZ=1034.9
+Checking overlaps for volume DetAQTA1 ... OK! 
+BLCMDvirtualdetector::Construct DetAQTA1 parent= relZ=1252.1 globZ=958.6
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with mother volume !
+          Overlap is detected for volume QTB11
+          with its mother volume QTB11
+          at mother local point (50.6067,-110.866,-237.52), overlapping by at least: 20 um 
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+Checking overlaps for volume QTB11 ... Checking overlaps for volume QTB11 ... OK! 
+BLCMDgenericquad::Construct QTB11 parent= relZ=1525.1 globZ=1525.1
+Checking overlaps for volume DetAQTB1 ... OK! 
+BLCMDvirtualdetector::Construct DetAQTB1 parent= relZ=1802.2 globZ=1379.7
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with mother volume !
+          Overlap is detected for volume QTB12
+          with its mother volume QTB12
+          at mother local point (-70.2008,-5.52805,237.52), overlapping by at least: 20 um 
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+Checking overlaps for volume QTB12 ... Checking overlaps for volume QTB12 ... OK! 
+BLCMDgenericquad::Construct QTB12 parent= relZ=2065.5 globZ=2065.5
+Checking overlaps for volume DetAQTB2 ... OK! 
+BLCMDvirtualdetector::Construct DetAQTB2 parent= relZ=2753.8 globZ=2108.0
+Checking overlaps for volume SHEILD_A ... OK! 
+BLCMDtubs::Construct SHEILD_A parent= relZ=3318.8 globZ=3318.8
+	zmin=-815.2 zmax=7452.8 kill=1
+Checking overlaps for volume Det1 ... OK! 
+BLCMDvirtualdetector::Construct Det1 parent= relZ=6765.3 globZ=5178.3
+Checking overlaps for volume SHIELD ... OK! 
+BLCMDtubs::Construct SHIELD parent= relZ=7395.7 globZ=7395.7
+	zmin=6920.7 zmax=7870.7 kill=1
+BLMappedMagnet::Construct ASM1 parent= relZ=7395.7
+Checking overlaps for volume sheild_bend ... OK! 
+BLCMDtubs::Construct sheild_bend parent= relZ=7629.4 globZ=7629.4
+	zmin=5629.4 zmax=9629.4 kill=1
+Checking overlaps for volume Det2 ... OK! 
+BLCMDvirtualdetector::Construct Det2 parent= relZ=7533.7 globZ=-5075.5
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with mother volume !
+          Overlap is detected for volume QSL11
+          with its mother volume QSL11
+          at mother local point (-89.7358,-0.325048,-295.02), overlapping by at least: 20 um 
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+Checking overlaps for volume QSL11 ... Checking overlaps for volume QSL11 ... OK! 
+BLCMDgenericquad::Construct QSL11 parent= relZ=7326.7 globZ=7326.7
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with mother volume !
+          Overlap is detected for volume QSL12
+          with its mother volume QSL12
+          at mother local point (89.2701,-57.467,295.02), overlapping by at least: 20 um 
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+Checking overlaps for volume QSL12 ... Checking overlaps for volume QSL12 ... OK! 
+BLCMDgenericquad::Construct QSL12 parent= relZ=7235.1 globZ=7235.1
+Checking overlaps for volume Det3 ... OK! 
+BLCMDvirtualdetector::Construct Det3 parent= relZ=7061.5 globZ=-8569.9
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with mother volume !
+          Overlap is detected for volume QSL13
+          with its mother volume QSL13
+          at mother local point (-61.2605,-46.6909,295.02), overlapping by at least: 20 um 
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+Checking overlaps for volume QSL13 ... Checking overlaps for volume QSL13 ... OK! 
+BLCMDgenericquad::Construct QSL13 parent= relZ=6958.4 globZ=6958.4
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with mother volume !
+          Overlap is detected for volume QSL14
+          with its mother volume QSL14
+          at mother local point (-25.8878,-83.4145,295.02), overlapping by at least: 20 um 
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+Checking overlaps for volume QSL14 ... Checking overlaps for volume QSL14 ... OK! 
+BLCMDgenericquad::Construct QSL14 parent= relZ=6866.7 globZ=6866.7
+Checking overlaps for volume Det4 ... OK! 
+BLCMDvirtualdetector::Construct Det4 parent= relZ=6661.0 globZ=-11533.6
+Checking overlaps for volume SHIELD_B ... OK! 
+BLCMDtubs::Construct SHIELD_B parent= relZ=7099.7 globZ=7099.7
+	zmin=3708.7 zmax=10490.7 kill=1
+BLMappedMagnet::Construct ASM2 parent= relZ=6324.6
+Checking overlaps for volume Det5 ... OK! 
+BLCMDvirtualdetector::Construct Det5 parent= relZ=5640.9 globZ=-7132.0
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with mother volume !
+          Overlap is detected for volume QSL15
+          with its mother volume QSL15
+          at mother local point (99.6249,53.5724,295.02), overlapping by at least: 20 um 
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+Checking overlaps for volume QSL15 ... Checking overlaps for volume QSL15 ... OK! 
+BLCMDgenericquad::Construct QSL15 parent= relZ=4679.7 globZ=4679.7
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with mother volume !
+          Overlap is detected for volume QSL16
+          with its mother volume QSL16
+          at mother local point (94.5749,-53.9361,295.02), overlapping by at least: 20 um 
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+Checking overlaps for volume QSL16 ... Checking overlaps for volume QSL16 ... OK! 
+BLCMDgenericquad::Construct QSL16 parent= relZ=3983.7 globZ=3983.7
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with mother volume !
+          Overlap is detected for volume QSL17
+          with its mother volume QSL17
+          at mother local point (-46.8807,-35.5403,-295.02), overlapping by at least: 20 um 
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+Checking overlaps for volume QSL17 ... Checking overlaps for volume QSL17 ... OK! 
+BLCMDgenericquad::Construct QSL17 parent= relZ=2369.6 globZ=2369.6
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with mother volume !
+          Overlap is detected for volume QSL18
+          with its mother volume QSL18
+          at mother local point (29.4718,0.214773,295.02), overlapping by at least: 20 um 
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+***    printing: every 10-th occurrence
+**************************************************************************
+Checking overlaps for volume QSL18 ... Checking overlaps for volume QSL18 ... OK! 
+BLCMDgenericquad::Construct QSL18 parent= relZ=1623.1 globZ=1623.1
+Checking overlaps for volume DetBH ... OK! 
+BLCMDvirtualdetector::Construct DetBH parent= relZ=811.1 globZ=-2426.6
+Checking overlaps for volume DetTar ... OK! 
+BLCMDvirtualdetector::Construct DetTar parent= relZ=-180.3 globZ=-1460.6
+Checking overlaps for volume SHIELD_TAR ... OK! 
+BLCMDtubs::Construct SHIELD_TAR parent= relZ=-180.3 globZ=-180.3
+	zmin=-2680.3 zmax=2319.7 kill=1
+Checking overlaps for volume DetBC1 ... OK! 
+BLCMDvirtualdetector::Construct DetBC1 parent= relZ=-1667.5 globZ=-11.7
+Checking overlaps for volume DetBC2 ... OK! 
+BLCMDvirtualdetector::Construct DetBC2 parent= relZ=-2658.9 globZ=954.2
+=======================================================================
+======       Pre-compound/De-excitation Physics Parameters     ========
+=======================================================================
+Type of pre-compound inverse x-section              3
+Type of de-excitation inverse x-section             3
+Min excitation energy (keV)                         0.1
+Level density (1/MeV)                               0.1
+Time limit for long lived isomeres (ns)             1e+07
+Correlated gamma emission flag                      0
+=======================================================================
+/home/priyaroy/Geant4Data/G4NDL4.5
+@@@ G4ParticleHPInelastic instantiated for particle neutron data directory variable is G4NEUTRONHPDATA pointing to /home/priyaroy/Geant4Data/G4NDL4.5/Inelastic
+@@@ G4ParticleHPInelasticData instantiated for particle neutron data directory variable is G4NEUTRONHPDATA pointing to /home/priyaroy/Geant4Data/G4NDL4.5
+**************************************************************************
+*** G4Exception: Possible wrong format
+***    severity: Warning
+***   issued by: BLTrackFile input
+*** description: Assumed OK
+**************************************************************************
+
+Geometry test nPoints=100 tolerance=0.002 mm:
+Testing geometry for children of group 'World':
+Total geometry errors = 0  0 seconds
+
+================== Prepare Visualization ==================
+Stochastic processes are enabled.
+Available UI session types: [ Qt, GAG, tcsh, csh ]
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Visualization Manager initialising...
+Registering graphics systems...
+
+You have successfully registered the following graphics systems.
+Current available graphics systems are:
+ASCIITree (ATree)
+DAWNFILE (DAWNFILE)
+G4HepRep (HepRepXML)
+G4HepRepFile (HepRepFile)
+RayTracer (RayTracer)
+VRML1FILE (VRML1FILE)
+VRML2FILE (VRML2FILE)
+gMocrenFile (gMocrenFile)
+OpenGLImmediateQt (OGLIQt, OGLI)
+OpenGLStoredQt (OGLSQt, OGL, OGLS)
+OpenGLImmediateX (OGLIX, OGLIQt_FALLBACK)
+OpenGLStoredX (OGLSX, OGLSQt_FALLBACK)
+RayTracerX (RayTracerX)
+
+Registering model factories...
+
+You have successfully registered the following model factories.
+Registered model factories:
+  generic
+  drawByAttribute
+  drawByCharge
+  drawByOriginVolume
+  drawByParticleID
+  drawByEncounteredVolume
+
+Registered filter factories:
+  attributeFilter
+  chargeFilter
+  originVolumeFilter
+  particleFilter
+  encounteredVolumeFilter
+
+You have successfully registered the following user vis actions.
+Run Duration User Vis Actions: none
+End of Event User Vis Actions: none
+End of Run User Vis Actions: none
+
+Some /vis commands (optionally) take a string to specify colour.
+Available colours:
+  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
+
+
+Selected visualization viewer: Qt
+BLVisManager init: /vis/open OGLSQt
+BLVisManager init: /vis/viewer/set/auxiliaryEdge true
+BLVisManager init: /vis/viewer/set/style surface
+BLVisManager init: /vis/viewer/set/viewpointThetaPhi 0 0 deg
+BLVisManager init: /vis/drawVolume
+BLVisManager init: /tracking/storeTrajectory 1
+BLVisManager init: /vis/scene/add/trajectories
+/tracking/storeTrajectory 1
+Attributes available for modeling and filtering with
+  "/vis/modeling/trajectories/create/drawByAttribute" and
+  "/vis/filtering/trajectories/create/attributeFilter" commands:
+G4TrajectoriesModel:
+  Event ID (EventID): G4int
+  Run ID (RunID): G4int
+G4Trajectory:
+  Charge (Ch): unit: e+ (G4double)
+  Track ID (ID): G4int
+  Initial kinetic energy (IKE): G4BestUnit (G4double)
+  Initial momentum magnitude (IMag): G4BestUnit (G4double)
+  Initial momentum (IMom): G4BestUnit (G4ThreeVector)
+  No. of points (NTP): G4int
+  PDG Encoding (PDG): G4int
+  Parent ID (PID): G4int
+  Particle Name (PN): G4String
+G4TrajectoryPoint:
+  Position (Pos): G4BestUnit (G4ThreeVector)
+WARNING: Trajectory storing has been requested.  This action may be
+  reversed with "/tracking/storeTrajectory 0".
+BLVisManager init: /vis/scene/endOfEventAction accumulate -1
+WARNING: The vis manager will keep an unlimited number of events.
+  This may use a lot of memory.
+  It may be changed with, e.g., "/vis/scene/endOfEventAction accumulate 10".
+BLVisManager init: /vis/viewer/set/hiddenMarker true
+
+WARNING: No extent set for user vis action "SetUserAction".
+WARNING: User Vis Action extent is null.
+WARNING: For some reason, possibly mentioned above, it has not been
+  possible to add to the scene.
+@@@ G4ParticleHPInelastic instantiated for particle neutron data directory variable is G4NEUTRONHPDATA pointing to /home/priyaroy/Geant4Data/G4NDL4.5/Inelastic
+**************************************************************************
+*** G4Exception: printError
+***    severity: Warning
+***   issued by: 
+*** description: ntuple: no detectors in ntuple 'partOut'!  Possibilities are:
+**************************************************************************
+               
+fieldVoxels: nx=63 ny=2 nz=37, 4662 voxels, 13 fields
+fieldVoxels: max field count is 3 fields, # voxels >5: 0, >10: 0, >20: 0
+**************************************************************************
+*** G4Exception: GeomField1001
+***    severity: Warning
+***   issued by: G4MagInt_Driver::AccurateAdvance()
+*** description: Proposed step is zero; hstep = 0 !
+***     EventID: 780     TrackID: 0   mu+  KE=80.42 MeV
+**************************************************************************
+WARNING: 1000 events have been kept for refreshing and/or reviewing.
+
+  "/vis/reviewKeptEvents" to review them one by one.
+  "/vis/viewer/flush" or "/vis/viewer/rebuild" to see them accumulated.
+
+Graphics systems deleted.
+Visualization Manager deleting...
+
+Exceptions: 0 Fatal, 0 Events Aborted, 0 Stuck Tracks (stopped), 14 Warnings
+      1 times: GeomField1001
+     10 times: GeomVol1002
+      1 times: No radius cut
+      1 times: Possible wrong format
+      1 times: printError
+g4beamline: simulation complete

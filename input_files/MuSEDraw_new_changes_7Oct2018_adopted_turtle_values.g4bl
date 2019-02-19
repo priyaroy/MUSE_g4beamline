@@ -13,7 +13,7 @@
 ###################################################################################
 
 param -unset firstEvent=1
-param -unset nEvents=1000000
+param -unset nEvents=10000000
 param -unset beamPart=mu+
 # PER 2 Sept 2018 The Turtle deck that I copied the magnet parameters from was documented to say that the beamline momentum was 155 MeV
 param -unset P=155
@@ -39,7 +39,6 @@ physics $physicsName
 param partName=$beamPart
 param tuneP=$P
 
-
 param -unset beamAngle=22.5
 #param P=590
 param sigmaX=1.5
@@ -54,7 +53,7 @@ param sigmaYp=0.08
 #Try 0 momentum dispersion to see focus at IFP
 param sigmaP=0
 
-param zProdTarget=-948
+param zProdTarget=-958
 param startZ=$zProdTarget
 
 #convert kG/mm to T/m
@@ -105,8 +104,8 @@ virtualdetector MuSEDet radius=$MuSEDetRadius length=$MuSEDetLength color=$MuSED
 ### define QSL quad (i.e. quadrupole magnet properties, the magnets are shown as red cylinders)
 ### The 'QSL' quad is defined here such that it has rounded + aperture. See pg 40 of user manual.
 
-#PRoy 22 Sept 2018: corrected LQSL to 600 mm to match Turtle
-param LQSL=600
+#PRoy 3 Oct 2018: corrected LQSL to 590 mm to match Turtle
+param LQSL=590
 param RQSL=120
 genericquad QSL fieldLength=$LQSL coilHalfWidth=50 coilRadius=150 poleTipRadius=125 ironRadius=$RIRON ironLength=$LQSL kill=$killInIron fringe=0 ironColor=$ironColor
 
@@ -158,14 +157,14 @@ param RIRON=500
 genericquad QTA11 fieldLength=$LQTA1 apertureRadius=$RQTA1 gradient=$GradQTA1 ironRadius=$RIRON ironLength=$LQTA1 kill=$killInIron fringe=0 ironColor=$ironColor
 param PQTA1=$LDRIFT1+0.5*$LQTA1
 
-# PRoy: the value is PQTA1 = 162 mm (with ProdTarget z @ -948 mm). 162+948 mm = 1110 mm
+# PRoy: the value is PQTA1 = 162 mm (with ProdTarget z @ -958 mm). 162+958 mm = 1120 mm
 
 ### place quad magnet 'QTA11'
 
 place QTA11 z=$PQTA1
 
 #*****Define and place Quad magnet named QTB11 with rounded + aperture ****
-param LDRIFT2=100
+param LDRIFT2=131
 param PDRIFT21=$PQTA1+0.5*$LQTA1+0.5*$LDRIFT2
 
 param LQTB=475
@@ -175,21 +174,23 @@ param GradQTB1=$BQTB1/$RQTB*$kGpmm_to_Tpm
 genericquad QTB11 gradient=$GradQTB1 fieldLength=$LQTB coilHalfWidth=50 coilRadius=150 poleTipRadius=125 ironRadius=$RIRON ironLength=$LQTB kill=$killInIron fringe=0 ironColor=$ironColor
 param PQTB1=$PDRIFT21+0.5*$LDRIFT2+0.5*$LQTB
 
-# PRoy: the value is PQTB1 = 661.5 mm (with Prod target z @ -948 mm). 661.5 + 948 mm = 1609.5 mm
+# PRoy: the value is PQTB1 = 692.5 mm (with Prod target z @ -958 mm). 692.5 + 958 mm = 1650.5 mm
  
 place QTB11 z=$PQTB1 
 
 #**** Define and place Quad magnet named QTB12 with rounded + aperture ****
+param LDRIFT20=110
 
-param PDRIFT22=$PQTB1+0.5*$LQTB+0.5*$LDRIFT2
+param PDRIFT22=$PQTB1+0.5*$LQTB+0.5*$LDRIFT20
+
 
 param BQTB2=-1.1965*$scale
 param GradBQTB2=$BQTB2/$RQTB*$kGpmm_to_Tpm
 genericquad QTB12 gradient=$GradBQTB2 fieldLength=$LQTB coilHalfWidth=50 coilRadius=150 poleTipRadius=125 ironRadius=$RIRON ironLength=$LQTB kill=$killInIron fringe=0 ironColor=$ironColor
-param PQTB2=$PDRIFT22+0.5*$LDRIFT2+0.5*$LQTB
+param PQTB2=$PDRIFT22+0.5*$LDRIFT20+0.5*$LQTB
 place QTB12 z=$PQTB2
 
-#P. Roy: value of PQTB2 = 1236.5 mm (with Prod target z @ -948 mm). 1236.5 + 948 mm = 2184.5 mm
+#P. Roy: value of PQTB2 = 1277.5 mm (with Prod target z @ -958 mm). 1277.5 + 958 mm = 2235.5 mm
 
 #**** Define and place shield and virtual detector *****************
 param LDRIFT3=3586
@@ -211,23 +212,30 @@ param ANGLE_ASM_deg=$ANGLE_ASM*pi/180.
 param L_center_line_ASM=2.*775.39
 # P Roy: L_center_line_ASM is magnetic length = 1551 mm
 
-cornerarc z=$PDRIFT4+0.5*$LDRIFT4 angle=$ANGLE_ASM/2. centerRadius=$L_center_line_ASM/$ANGLE_ASM_deg
-param PASM1=$PDRIFT4+0.5*$LDRIFT4+0.5*$L_center_line_ASM
+cornerarc z=6384.01 angle=$ANGLE_ASM/2. centerRadius=$L_center_line_ASM/$ANGLE_ASM_deg
 
+#param PASM1=$PDRIFT4+0.5*$LDRIFT4+0.5*$L_center_line_ASM
+
+param PASM1=7159.4
 place SHIELD length=950 z=$PASM1 innerRadius=3*$RIRON outerRadius=3.1*$RIRON initialPhi=-60 finalPhi=60
 
 #The map is set to 1Tesla so the current/intensity gives the strength of the dipole in Tesla 
 param BASM1=-0.591271616286*155.0/210.0*$scale*$fudge
 
-place ASM rename=ASM1 z=$PASM1 current=$BASM1  
-# PRoy : value of PASM1 = 7169.39 mm (with Prod target z @ -948 mm). 7169.39 + 948 mm = 8117.4 mm
+# PRoy (3 Oct 2018): 0.59127*155/210 = 0.43641 Tesla which matches with TurtleInput.dat
+
+place ASM rename=ASM1 z=$PASM1 current=1.05*$BASM1 
+
+# PRoy (7 Oct 2018): Scaling current by 1.05 removed z-offset in the beam @ IFP and DetTar.
+
+# PRoy : value of PASM1 = 7159.4 mm (with Prod target z @ -958 mm). 7159.4 + 958 mm = 8117.4 mm
 
 cornerarc z=$PASM1 angle=$ANGLE_ASM/2. centerRadius=$L_center_line_ASM/$ANGLE_ASM_deg
 
 #********Place shield****************************************************************
 place SHIELD rename=sheild_bend z=$PDRIFT4+$L_center_line_ASM length=4000  innerRadius=2.0*$RIRON outerRadius=2.1*$RIRON initialPhi=65 finalPhi=295
 
-param LDRIFT5=1352
+param LDRIFT5=1357
 param PDRIFT5=$PASM1+0.5*$L_center_line_ASM+0.5*$LDRIFT5
 
 param beginCenter=$PASM1++0.5*$L_center_line_ASM
@@ -241,9 +249,9 @@ param GradBQSL11=$BQSL11/$RQSL*$kGpmm_to_Tpm
 param PQSL11=$PDRIFT5+0.5*$LDRIFT5+0.5*$LQSL
 place QSL rename=QSL11 gradient=$GradBQSL11 z=$PQSL11
 
-# PRoy : value of PQSL11 = 9596.8 mm (with Prod target z @ -948 mm). 9596.8+948 mm = 10544.8 mm
+# PRoy : value of PQSL11 = 9586.8 mm (with Prod target z @ -958 mm). 9586.8+958 mm = 10544.8 mm
 #*****Place quad magnet with name QSL12 and 'round +' type aperture *******************
-param LDRIFT6=100
+param LDRIFT6=112
 param PDRIFT6=$PQSL11+0.5*$LQSL+0.5*$LDRIFT6
 
 param BQSL12=-0.9086*$scale
@@ -251,27 +259,34 @@ param GradBQSL12=$BQSL12/$RQSL*$kGpmm_to_Tpm
 param PQSL12=$PDRIFT6+0.5*$LDRIFT6+0.5*$LQSL
 place QSL rename=QSL12 gradient=$GradBQSL12 z=$PQSL12
 
-# PRoy : value of PQSL12 = 10296.8 mm (with Prod target z @ -948 mm). 10296.8+948 mm = 11244.8 mm
+# PRoy : value of PQSL12 = 10288 mm (with Prod target z @ -958 mm). 10288+958 mm = 11246 mm
 
-param LDRIFT7=739-0.5*$MuSEDetLength
+param LDRIFT7=1018-0.5*$MuSEDetLength
 param PDRIFT7=$PQSL12+0.5*$LQSL+0.5*$LDRIFT7
 
 #*******Place virtual detector and label it as Det3***********************************
-place MuSEDet z=$PDRIFT7+0.5*$LDRIFT7+0.5*$MuSEDetLength rename=Det3
+#place MuSEDet z=$PDRIFT7+0.5*$LDRIFT7+0.5*$MuSEDetLength rename=Det3
 
-# PRoy : value of z = 11335.8 mm (with Prod target z @ -948 mm). 11335.8+948 mm = 12283.8 mm
+place MuSEDet z=11650 rename=Det3
+
+# PRoy : value of z = 11650 mm (with Prod target z @ -958 mm). 11650+958 mm = 12608 mm
 
 #*****Place quad magnet with name QSL13 and 'round +' type aperture *******************
-param LDRIFT8=$LDRIFT7
-param PDRIFT8=$PDRIFT7+$MuSEDetLength+0.5*$LDRIFT7+0.5*$LDRIFT8
+param LDRIFT8=512
+
+#P Roy: 3 Oct 2018: LDRIFT8 def. changed to match Turtle drift (412 mm + 100 mm (100 mm is to match #IFP width in turtle))
+
+param PDRIFT8=$PDRIFT7+0.5*$MuSEDetLength+0.5*$LDRIFT7
+#same as z of IFP
 
 param BQSL13=-0.9086*$scale
 param GradBQSL13=$BQSL13/$RQSL*$kGpmm_to_Tpm
-param PQSL13=$PDRIFT8+0.5*$LDRIFT8+0.5*$LQSL
+param PQSL13=$PDRIFT8+$LDRIFT8+0.5*$LQSL
 place QSL rename=QSL13 gradient=$GradBQSL13 z=$PQSL13
 
+# PRoy : value of PQSL13 = 12408 mm (with Prod target z @ -958 mm). 12408+958 mm = 13366 mm
 #*****Place quad magnet with name QSL14 and 'round +' type aperture *******************
-param LDRIFT9=100
+param LDRIFT9=112
 param PDRIFT9=$PQSL13+0.5*$LQSL+0.5*$LDRIFT9
 
 param BQSL14=1.2732*$scale
@@ -279,7 +294,9 @@ param GradBQSL14=$BQSL14/$RQSL*$kGpmm_to_Tpm
 param PQSL14=$PDRIFT9+0.5*$LDRIFT9+0.5*$LQSL
 place QSL rename=QSL14 gradient=$GradBQSL14 z=$PQSL14
 
-param LDRIFT10=1352
+# PRoy : value of PQSL14 = 13110 mm (with Prod target z @ -958 mm). 13110+958 mm = 14068 mm
+
+param LDRIFT10=1311
 param PDRIFT10=$PQSL14+0.5*$LQSL+0.5*$LDRIFT10
 
 #*******Place virtual detector and label it as Det4***********************************
@@ -295,39 +312,81 @@ place SHIELD rename=SHIELD_B z=($endCenter+$beginCenter)/2.0 length=$endCenter-$
 
 cornerarc z=$PDRIFT10+0.5*$LDRIFT10 angle=$ANGLE_ASM/2. centerRadius=$L_center_line_ASM/$ANGLE_ASM_deg
 param PASM2=$PDRIFT10+0.5*$LDRIFT10+0.5*$L_center_line_ASM
+
+
 #The map is set to 1Tesla so the current/intensity gives the strength of the dipole in Tesla 
 param BASM2=-0.591271616286*155.0/210.0*$scale*$fudge
-place ASM rename=ASM2 z=$PASM2 current=$BASM2  
+place ASM rename=ASM2 z=$PASM2 current=1.05*$BASM2 
+
+#PRoy: the scale factor of 1.05 remvoed z-offset in beam @ IFP and DetTar
+
+# PRoy : value of PASM2 = 15492.2mm (with Prod target z @ -958 mm). 15492.2+958 mm = 16450.2 mm
+
 cornerarc z=$PASM2 angle=$ANGLE_ASM/2. centerRadius=$L_center_line_ASM/$ANGLE_ASM_deg
 
 #*******Place virtual detector and label it as Det5***********************************
-place MuSEDet z=1478+$PASM2 rename=Det5
+place MuSEDet z=16810.6 rename=Det5
 
 #*****Place quad magnet with name QSL15 and 'round +' type aperture *******************
+param LDRIFT11=684
 param BQSL15=-0.5440*$scale
 param GradBQSL15=$BQSL15/$RQSL*$kGpmm_to_Tpm
-
 #place QSL rename=QSL15 z=2940-1452/2.0-$LQSL/2+$PASM2
 
-#P Roy: 3Oct 2018: assigned GradBQSL15 as field gradient for this magnet
-place QSL rename=QSL15 gradient=$GradBQSL15 z=2940-1452/2.0-$LQSL/2+$PASM2
+#P.Roy: 3 Oct 2018: corrected def for position of QSL15 and defined B field gradient
+
+param PQSL15=$PASM2+0.5*$L_center_line_ASM+$LDRIFT11+0.5*$LQSL 
+place QSL rename=QSL15 gradient=$GradBQSL15 z=$PQSL15
+
+# PRoy : value of PQSL15 = 17246.6 mm (with Prod target z @ -958 mm).17246.6 +958 mm = 18204.6 mm
 
 #*****Place quad magnet with name QSL16 and 'round +' type aperture *******************
 param BQSL16=0.7506*$scale
 param GradBQSL16=$BQSL16/$RQSL*$kGpmm_to_Tpm
-place QSL rename=QSL16 gradient=$GradBQSL16 z=2940-$LQSL/2+$PASM2
+# place QSL rename=QSL16 gradient=$GradBQSL16 z=2940-$LQSL/2+$PASM2
+
+#P.Roy: 3 Oct 2018: corrected def for position of QSL16
+param LDRIFT12=112
+param PQSL16=$PQSL15+$LQSL+$LDRIFT12
+
+place QSL rename=QSL16 gradient=$GradBQSL16 z=$PQSL16
+
+# PRoy : value of PQSL16 = 17948.6 mm (with Prod target z @ -958 mm).17948.6 +958 mm = 18906.6 mm
 
 #*****Place quad magnet with name QSL17 and 'round +' type aperture *******************
 param BQSL17=-0.9086*$scale
 param GradBQSL17=$BQSL17/$RQSL*$kGpmm_to_Tpm
-place QSL rename=QSL17 gradient=$GradBQSL17 z=4231.25+$PASM2
+#place QSL rename=QSL17 gradient=$GradBQSL17 z=4231.25+$PASM2
+
+#P.Roy: 3 Oct 2018: corrected def for position of QSL17
+param LDRIFT13=1038
+param PQSL17=$PQSL16+$LQSL+$LDRIFT13
+
+place QSL rename=QSL17 gradient=$GradBQSL17 z=$PQSL17
+
+# PRoy : value of PQSL17 = 19576.6 mm (with Prod target z @ -958 mm).19576.6 +958 mm = 20534.6 mm
 
 #*****Place quad magnet with name QSL18 and 'round +' type aperture *******************
 param BQSL18=1.2732*$scale
 param GradBQSL18=$BQSL18/$RQSL*$kGpmm_to_Tpm
-place QSL rename=QSL18 gradient=$GradBQSL18 z=4957.75+$PASM2
+#place QSL rename=QSL18 gradient=$GradBQSL18 z=4957.75+$PASM2
 
-param targetLocation=6802.678+$PASM2
+#P.Roy: 3 Oct 2018: corrected def for position of QSL17
+param LDRIFT14=163
+param PQSL18=$PQSL17+$LQSL+$LDRIFT14
+
+place QSL rename=QSL18 gradient=$GradBQSL18 z=$PQSL18
+
+# PRoy : value of PQSL18 = 20329.6 mm (with Prod target z @ -958 mm).20329.6 +958 mm = 21287.6 mm
+
+#************************************************************************************************
+#param targetLocation=6802.678+$PASM2
+
+#P.Roy: 3 Oct 2018: corrected def for position of target to match turtle
+param LDRIFT15=1536
+param targetLocation=22159.5
+
+# PRoy:value of targetLocation=22159.5 mm (with Prod target z@-958 mm). 22159.5+958 mm = 23117.5 mm
 
 place MuSEDet z=$targetLocation-1000 rename=DetBH
 

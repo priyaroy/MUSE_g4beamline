@@ -1,0 +1,1062 @@
+Error: cannot open file "iostream"  (tmpfile):2:
+*** Interpreter error recovered ***
+G4BL_DIR=/home/priyaroy/Documents/G4beamline-3.04
+G4beamline Process ID 10597
+
+*************************************************************
+ g4beamline version: 3.04                        (Mar  2 2017)
+                      Copyright : Tom Roberts, Muons, Inc.
+                        License : Gnu Public License
+                            WWW : http://g4beamline.muonsinc.com
+*************************************************************
+ Geant4 version Name: geant4-10-03    (9-December-2016)
+                      Copyright : Geant4 Collaboration
+                      Reference : NIM A 506 (2003), 250-303
+                            WWW : http://cern.ch/geant4
+*************************************************************
+
+geometry                   nPoints=100 printGeometry=0 visual=0
+                           tolerance=0.002
+param        firstEvent    1
+param        nEvents       500000
+param        lastEvent     500000
+param        beamPart      mu+
+param        pChannel      155
+param        pOffset       1.0
+param        scale         1
+param        fieldMap      1
+param        map1          ASM1.g4blmap
+param        map2          ASM2.g4blmap
+param        scaleDipole   0.999
+param        scaleDipole2  0.999
+param        scaleQSL      1
+param        scaleQT       1
+param        sepChar       _
+param        file          MuSEBeam_mu+_155_1.0
+param        histoFile     MuSEBeam_mu+_155_1.0.root
+param        physicsName   QGSP_BERT_HP
+G4PhysListFactory::GetReferencePhysList <QGSP_BERT_HP>  EMoption= 0
+<<< Geant4 Physics List simulation engine: QGSP_BERT_HP 3.0
+
+
+<<< Reference Physics List QGSP_BERT_HP is built
+
+physics      QGSP_BERT_HP  disable=Decay inactivate=Decay deactivate=Decay
+                           doStochastics=1 fluct=1 minRangeCut=1 list=0
+                           gammaToMuPair=0 spinTracking=0
+                           synchrotronRadiation=0 synchrotronRadiationMuon=0
+                           maxTime=1e+06
+param        partName      mu+
+param        tuneP         155
+param        beamAngle     22.5
+param        zProdTarget   -958
+param        startZ        -958
+param        kGpmm_to_Tpm  100
+param        kGpmm2_to_Tpm2 100000
+param        RIRON         800
+param        killInPipe    0
+param        pipeColor     0,1,1,0.4
+param        killInIron    1
+param        ironColor     1,0,0,0.4
+param        absorbAllColor 1,1,0,0.05
+param        killAllColor  1,1,0,0.05
+param        killInShield  1
+param        shieldColor   1,1,0,0.05
+particlecolor              e+=1,1,1 e-=1,1,1 pi+=0,1,1 pi-=0,1,1
+trackcuts                  kill= keep=mu+ killSecondaries=0 kineticEnergyCut=0
+                           kineticEnergyMax=1.798e+308 maxTime=1e+06
+                           keepPrimaries=0 steppingVerbose=0
+collective                 deltaT=-1 format= filenamePrefix=
+param        worldMaterial Vacuum
+param        deltaChord    0.5
+param        maxstep       10
+**************************************************************************
+*** G4Exception: No radius cut
+***    severity: Warning
+***   issued by: start command
+**************************************************************************
+start                      x=0 y=0 z=0 initialZ=-958 rotation= radiusCut=0
+                           ring=0
+cornerarc                  z=-958 centerRadius=10 angle=22.5 rotation=
+                           radiusCut=0
+beam    ASCII   nEvents=2147483647 firstEvent=-1 lastEvent=2147483647 beamZ=-3700000000000000000000.0 maxR=1000000.0 renumber=0 weight=1.000000 
+		filename=g4_in.txt format=BLTrackFile 
+		
+param        MuSEDetColor  1,0,1,1
+param        MuSEDetLength 15
+param        MuSEDetRadius 500
+virtualdetector MuSEDet    radius=500 innerRadius=0 height=1000 width=1000
+                           length=15 maxStep=100 material= color=1,0,1,1
+                           noSingles=0 format= filename= file= require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+param        LQSL          590
+param        RQSL          120
+genericquad  QSL           fieldLength=590 ironLength=590 ironRadius=800
+                           apertureRadius=0 poleTipRadius=125 coilRadius=150
+                           coilHalfwidth=50 coilHalfWidth=50 gradient=0
+                           maxStep=100 ironMaterial=Fe fieldMaterial=Vacuum
+                           ironColor=1,0,0,0.4 kill=1 fringe= fringeFactor=1
+                           openAperture=0
+tubs         SHIELD        innerRadius=880 outerRadius=960 initialPhi=0
+                           finalPhi=360 length=0 maxStep=100 material=
+                           color=1,1,0,0.05 kill=1 radius=960
+param        LPole         10
+param        RPole         160
+BLFieldMap: reading file 'ASM1.g4blmap'
+fieldmap     ASM1          filename=ASM1.g4blmap file=ASM1.g4blmap current=1
+                           gradient=1 timeOffset=0
+BLFieldMap: reading file 'ASM2.g4blmap'
+fieldmap     ASM2          filename=ASM2.g4blmap file=ASM2.g4blmap current=1
+                           gradient=1 timeOffset=0
+param        CollLength    50
+param        CollWidth     200
+box          Collimator    height=400 width=200 length=50 maxStep=100
+                           material=Cu color=.8,.8,.8 kill=1
+param        HJawLength    100
+param        HJawWidth     500
+param        HJawHeight    160
+box          HJaw          height=160 width=500 length=100 maxStep=100
+                           material=Cu color=.8,.8,.8 kill=1
+param        VJawLength    100
+param        VJawWidth     1000
+param        VJawHeight    500
+box          VJaw          height=500 width=1000 length=100 maxStep=100
+                           material=Cu color=.8,.8,.8 kill=1
+tubs         Mylar         innerRadius=0 outerRadius=50 initialPhi=0
+                           finalPhi=360 length=0.04 maxStep=100 material=MYLAR
+                           color=1,1,0 kill=0 radius=50
+tubs         Aluminum      innerRadius=0 outerRadius=50 initialPhi=0
+                           finalPhi=360 length=0.002 maxStep=100 material=Al
+                           color=1,1,0 kill=0 radius=50
+tubs         GEMgas1       innerRadius=0 outerRadius=50 initialPhi=0
+                           finalPhi=360 length=10.5 maxStep=100 material=Ar
+                           color=1,1,0 kill=0 radius=50
+tubs         GEMgas2       innerRadius=0 outerRadius=50 initialPhi=0
+                           finalPhi=360 length=4.5 maxStep=100
+                           material=CARBON_DIOXIDE color=1,1,0 kill=0
+                           radius=50
+tubs         Kap           innerRadius=0 outerRadius=50 initialPhi=0
+                           finalPhi=360 length=0.19 maxStep=100
+                           material=KAPTON color=1,1,0 kill=0 radius=50
+tubs         Copper        innerRadius=0 outerRadius=50 initialPhi=0
+                           finalPhi=360 length=0.03 maxStep=100 material=Cu
+                           color=1,1,0 kill=0 radius=50
+group        GEM           length=0 width=0 height=0 radius=0 material=Vacuum
+                           color= maxStep=100
+  place Mylar   copies=1 sequentially along z; 
+  place Aluminum copies=1 sequentially along z; 
+  place GEMgas1 copies=1 sequentially along z; 
+  place GEMgas2 copies=1 sequentially along z; 
+  place Kap     copies=1 sequentially along z; 
+  place Copper  copies=1 sequentially along z; 
+endgroup GEM    length=15.3 width=100.0 height=100.0
+tubs         GEMshield     innerRadius=51 outerRadius=400 initialPhi=0
+                           finalPhi=360 length=20 maxStep=100 material=Fe
+                           color=1,1,0,0.05 kill=1 radius=400
+param        BHlength      2
+tubs         BH            innerRadius=0 outerRadius=50 initialPhi=0
+                           finalPhi=360 length=2 maxStep=100
+                           material=PLASTIC_SC_VINYLTOLUENE color=1,1,0 kill=0
+                           radius=50
+tubs         BHshield      innerRadius=51 outerRadius=400 initialPhi=0
+                           finalPhi=360 length=2 maxStep=100 material=Fe
+                           color=1,1,0,0.05 kill=1 radius=400
+param        MuSEDetLengthS 1
+virtualdetector MuSEDetStart radius=500 innerRadius=0 height=1000 width=1000
+                           length=1 maxStep=100 material= color=1,0,1,1
+                           noSingles=0 format= filename= file= require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   MuSEDetStart copies=1 x=0.0 y=0.0 z=-957.0 rename='Det0'
+place   MuSEDet copies=1 x=0.0 y=0.0 z=-25.0 rename='Det0a'
+param        LDRIFT1       0
+param        PDRIFT1       0
+param        LQTA1         324
+param        RQTA1         75.0
+param        BQTA1         -0.9854
+param        GradQTA1      -1.3138667
+param        RIRON         500
+genericquad  QTA11         fieldLength=324 ironLength=324 ironRadius=500
+                           apertureRadius=75 poleTipRadius=0 coilRadius=0
+                           coilHalfwidth=0 coilHalfWidth=0 gradient=-1.314
+                           maxStep=100 ironMaterial=Fe fieldMaterial=Vacuum
+                           ironColor=1,0,0,0.4 kill=1 fringe= fringeFactor=1
+                           openAperture=0
+param        PQTA1         162
+place   QTA11   copies=1 x=0.0 y=0.0 z=162.0 
+param        LDRIFT2       131
+place   MuSEDet copies=1 x=0.0 y=0.0 z=397.0 rename='DetAQTA1'
+param        PDRIFT21      389.5
+param        LQTB          475
+param        RQTB          115.0
+param        BQTB1         -1.0894
+param        GradQTB1      -0.94730435
+genericquad  QTB11         fieldLength=475 ironLength=475 ironRadius=500
+                           apertureRadius=0 poleTipRadius=125 coilRadius=150
+                           coilHalfwidth=50 coilHalfWidth=50 gradient=-0.9473
+                           maxStep=100 ironMaterial=Fe fieldMaterial=Vacuum
+                           ironColor=1,0,0,0.4 kill=1 fringe= fringeFactor=1
+                           openAperture=0
+param        PQTB1         692.5
+place   QTB11   copies=1 x=0.0 y=0.0 z=692.5 
+param        LDRIFT20      110
+place   MuSEDet copies=1 x=0.0 y=0.0 z=992.5 rename='DetAQTB1'
+param        PDRIFT22      985
+param        BQTB2         1.1965
+param        GradBQTB2     1.0404348
+genericquad  QTB12         fieldLength=475 ironLength=475 ironRadius=500
+                           apertureRadius=0 poleTipRadius=125 coilRadius=150
+                           coilHalfwidth=50 coilHalfWidth=50 gradient=1.04
+                           maxStep=100 ironMaterial=Fe fieldMaterial=Vacuum
+                           ironColor=1,0,0,0.4 kill=1 fringe= fringeFactor=1
+                           openAperture=0
+param        PQTB2         1277.5
+place   QTB12   copies=1 x=0.0 y=0.0 z=1277.5 
+place   MuSEDet copies=1 x=0.0 y=0.0 z=2022.5 rename='DetAQTB2'
+param        LDRIFT3       3586
+param        PDRIFT3       3308
+place   HJaw    copies=1 x=-330.0 y=0.0 z=6200.0 
+place   HJaw    copies=1 x=330.0 y=0.0 z=6200.0 
+place   VJaw    copies=1 x=0.0 y=-330.0 z=6200.0 
+place   VJaw    copies=1 x=0.0 y=330.0 z=6200.0 
+param        LDRIFT4       1334
+param        PDRIFT4       5768
+place   SHIELD  copies=1 x=0.0 y=0.0 z=2634.0 rename='SHEILD_A'
+                length=5768+2500
+place   MuSEDet copies=1 x=0.0 y=0.0 z=6364.5 rename='Det1'
+param        ASMAngleDeg   75.
+param        ASMAngleRad   1.3089969
+param        L_center_line_ASM 1530.78
+param        ASMRadius     1169.4298
+cornerarc                  z=6435 centerRadius=1169 angle=37.5 rotation=
+                           radiusCut=1009
+param        PASM1         7200.39
+place   SHIELD  copies=1 x=0.0 y=0.0 z=7200.4 
+                finalPhi=60 initialPhi=-60 innerRadius=3*500 length=950
+                outerRadius=3.1*500
+param        BASM1         -0.43597835
+place   ASM1    copies=1 x=0.0 y=0.0 z=7200.4 
+                current=-0.43597835
+cornerarc                  z=7200 centerRadius=1169 angle=37.5 rotation=
+                           radiusCut=1009
+place   SHIELD  copies=1 x=0.0 y=0.0 z=7298.8 rename='sheild_bend'
+                finalPhi=295 initialPhi=65 innerRadius=2.0*500 length=4000
+                outerRadius=2.1*500
+param        LDRIFT5       1357
+param        PDRIFT5       8644.28
+param        beginCenter   7965.78
+place   MuSEDet copies=1 x=0.0 y=0.0 z=8032.3 rename='Det2'
+param        BQSL11        -1.2731
+param        GradBQSL11    -1.0609167
+param        PQSL11        9617.78
+place   QSL     copies=1 x=0.0 y=0.0 z=9617.8 rename='QSL11'
+                gradient=-1.0609167
+param        LDRIFT6       112
+param        PDRIFT6       9968.78
+param        BQSL12        0.9086
+param        GradBQSL12    0.75716667
+param        PQSL12        10319.78
+place   QSL     copies=1 x=0.0 y=0.0 z=10319.8 rename='QSL12'
+                gradient=0.75716667
+param        LDRIFT7       1010.5
+param        PDRIFT7       11120.03
+param        offsetIFP     300
+param        LDRIFTCollGEM 80
+place   Collimator copies=1 x=-205.0 y=0.0 z=11500.0 
+place   Collimator copies=1 x=205.0 y=0.0 z=11500.0 
+place   MuSEDet copies=1 x=0.0 y=0.0 z=11650.0 rename='Det3'
+param        LDRIFT8       512
+param        PDRIFT8       11632.78
+param        BQSL13        0.9086
+param        GradBQSL13    0.75716667
+param        PQSL13        12439.78
+place   QSL     copies=1 x=0.0 y=0.0 z=12439.8 rename='QSL13'
+                gradient=0.75716667
+param        LDRIFT9       112
+param        PDRIFT9       12790.78
+param        BQSL14        -1.2732
+param        GradBQSL14    -1.061
+param        PQSL14        13141.78
+place   QSL     copies=1 x=0.0 y=0.0 z=13141.8 rename='QSL14'
+                gradient=-1.061
+param        LDRIFT10      1311
+param        PDRIFT10      14092.28
+param        PASM2         15513.17
+place   MuSEDet copies=1 x=0.0 y=0.0 z=14718.3 rename='Det4'
+param        endCenter     14747.78
+place   SHIELD  copies=1 x=0.0 y=0.0 z=11356.8 rename='SHIELD_B'
+                length=14747.78-7965.78
+cornerarc                  z=1.475e+04 centerRadius=1169 angle=37.5 rotation=
+                           radiusCut=1009
+param        BASM2         -0.43597835
+place   ASM2    copies=1 x=0.0 y=0.0 z=15513.2 
+                current=-0.43597835
+cornerarc                  z=1.551e+04 centerRadius=1169 angle=37.5 rotation=
+                           radiusCut=1009
+place   MuSEDet copies=1 x=0.0 y=0.0 z=16288.1 rename='Det5'
+param        LDRIFT11      684
+param        BQSL15        0.544
+param        GradBQSL15    0.45333333
+param        PQSL15        17257.56
+place   QSL     copies=1 x=0.0 y=0.0 z=17257.6 rename='QSL15'
+                gradient=0.45333333
+param        BQSL16        -0.7506
+param        GradBQSL16    -0.6255
+param        LDRIFT12      112
+param        PQSL16        17959.56
+place   QSL     copies=1 x=0.0 y=0.0 z=17959.6 rename='QSL16'
+                gradient=-0.6255
+param        BQSL17        0.9086
+param        GradBQSL17    0.75716667
+param        LDRIFT13      1038
+param        PQSL17        19587.56
+place   QSL     copies=1 x=0.0 y=0.0 z=19587.6 rename='QSL17'
+                gradient=0.75716667
+param        BQSL18        -1.2732
+param        GradBQSL18    -1.061
+param        LDRIFT14      163
+param        PQSL18        20340.56
+place   QSL     copies=1 x=0.0 y=0.0 z=20340.6 rename='QSL18'
+                gradient=-1.061
+param        LDRIFT15      1536
+param        targetLocation 22259.5
+place   MuSEDet copies=1 x=0.0 y=0.0 z=22259.5 rename='DetTar'
+place   SHIELD  copies=1 x=0.0 y=0.0 z=22259.5 rename='SHIELD_TAR'
+                innerRadius=2*500 length=5000 outerRadius=2.1*500
+place   MuSEDet copies=1 x=0.0 y=0.0 z=23759.5 rename='DetBC1'
+place   MuSEDet copies=1 x=0.0 y=0.0 z=24759.5 rename='DetBC2'
+ntuple       partOut       category=NTuple detectors=Det* required=DetTar
+                           veto= format= filename= minHit=0 perTrack=0 union=0
+                           require=DetTar minHits=0 file=
+
+World size (before incrementing by 201.357 mm): 3100.0 H  27880.5 W  49534.0 L
+
+PARAMETERS:
+    ASMAngleDeg=75.
+    ASMAngleRad=1.3089969
+      ASMRadius=1169.4298
+          BASM1=-0.43597835
+          BASM2=-0.43597835
+       BHlength=2
+         BQSL11=-1.2731
+         BQSL12=0.9086
+         BQSL13=0.9086
+         BQSL14=-1.2732
+         BQSL15=0.544
+         BQSL16=-0.7506
+         BQSL17=0.9086
+         BQSL18=-1.2732
+          BQTA1=-0.9854
+          BQTB1=-1.0894
+          BQTB2=1.1965
+     CollLength=50
+      CollWidth=200
+     GradBQSL11=-1.0609167
+     GradBQSL12=0.75716667
+     GradBQSL13=0.75716667
+     GradBQSL14=-1.061
+     GradBQSL15=0.45333333
+     GradBQSL16=-0.6255
+     GradBQSL17=0.75716667
+     GradBQSL18=-1.061
+      GradBQTB2=1.0404348
+       GradQTA1=-1.3138667
+       GradQTB1=-0.94730435
+     HJawHeight=160
+     HJawLength=100
+      HJawWidth=500
+        LDRIFT1=0
+       LDRIFT10=1311
+       LDRIFT11=684
+       LDRIFT12=112
+       LDRIFT13=1038
+       LDRIFT14=163
+       LDRIFT15=1536
+        LDRIFT2=131
+       LDRIFT20=110
+        LDRIFT3=3586
+        LDRIFT4=1334
+        LDRIFT5=1357
+        LDRIFT6=112
+        LDRIFT7=1010.5
+        LDRIFT8=512
+        LDRIFT9=112
+  LDRIFTCollGEM=80
+          LPole=10
+           LQSL=590
+          LQTA1=324
+           LQTB=475
+L_center_line_ASM=1530.78
+   MuSEDetColor=1,0,1,1
+  MuSEDetLength=15
+ MuSEDetLengthS=1
+  MuSEDetRadius=500
+          PASM1=7200.39
+          PASM2=15513.17
+        PDRIFT1=0
+       PDRIFT10=14092.28
+       PDRIFT21=389.5
+       PDRIFT22=985
+        PDRIFT3=3308
+        PDRIFT4=5768
+        PDRIFT5=8644.28
+        PDRIFT6=9968.78
+        PDRIFT7=11120.03
+        PDRIFT8=11632.78
+        PDRIFT9=12790.78
+         PQSL11=9617.78
+         PQSL12=10319.78
+         PQSL13=12439.78
+         PQSL14=13141.78
+         PQSL15=17257.56
+         PQSL16=17959.56
+         PQSL17=19587.56
+         PQSL18=20340.56
+          PQTA1=162
+          PQTB1=692.5
+          PQTB2=1277.5
+          RIRON=500
+          RPole=160
+           RQSL=120
+          RQTA1=75.0
+           RQTB=115.0
+     VJawHeight=500
+     VJawLength=100
+      VJawWidth=1000
+            Zcl=24767
+ absorbAllColor=1,1,0,0.05
+      beamAngle=22.5
+       beamPart=mu+
+    beginCenter=7965.78
+     deltaChord=0.5
+deltaIntersection=0.1
+   deltaOneStep=0.01
+      endCenter=14747.78
+         epsMax=0.05
+         epsMin=2.5e-7
+ eventTimeLimit=30
+       fieldMap=1
+    fieldVoxels=200,200,200
+           file=MuSEBeam_mu+_155_1.0
+     firstEvent=1
+      histoFile=MuSEBeam_mu+_155_1.0.root
+    histoUpdate=0
+      ironColor=1,0,0,0.4
+ kGpmm2_to_Tpm2=100000
+   kGpmm_to_Tpm=100
+   killAllColor=1,1,0,0.05
+     killInIron=1
+     killInPipe=0
+   killInShield=1
+      lastEvent=500000
+           map1=ASM1.g4blmap
+           map2=ASM2.g4blmap
+        maxStep=100.0
+        maxstep=10
+        minStep=0.01
+        nEvents=500000
+      offsetIFP=300
+       pChannel=155
+        pOffset=1.0
+       partName=mu+
+    physicsName=QGSP_BERT_HP
+      pipeColor=0,1,1,0.4
+          scale=1
+    scaleDipole=0.999
+   scaleDipole2=0.999
+       scaleQSL=1
+        scaleQT=1
+        sepChar=_
+    shieldColor=1,1,0,0.05
+         startZ=-958
+ steppingFormat=N GLOBAL CL KE STEP VOL PROCESS
+steppingVerbose=0
+ targetLocation=22259.5
+          tuneP=155
+         viewer=none
+ wallClockLimit=-1
+  worldMaterial=Vacuum
+    zProdTarget=-958
+     zTolerance=2.0
+Checking overlaps for volume Det0 ... OK! 
+BLCMDvirtualdetector::Construct Det0 parent= relZ=1.1 globZ=1.2
+Checking overlaps for volume Det0a ... OK! 
+BLCMDvirtualdetector::Construct Det0a parent= relZ=862.2 globZ=660.2
+Checking overlaps for volume QTA11 ... OK! 
+Checking overlaps for volume QTA11 ... OK! 
+BLCMDgenericquad::Construct QTA11 parent= relZ=1034.9 globZ=1034.9
+Checking overlaps for volume DetAQTA1 ... OK! 
+BLCMDvirtualdetector::Construct DetAQTA1 parent= relZ=1252.1 globZ=958.6
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with mother volume !
+          Overlap is detected for volume QTB11
+          with its mother volume QTB11
+          at mother local point (-45.3948,-17.6454,-237.52), overlapping by at least: 20 um 
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+Checking overlaps for volume QTB11 ... Checking overlaps for volume QTB11 ... OK! 
+BLCMDgenericquad::Construct QTB11 parent= relZ=1525.1 globZ=1525.1
+Checking overlaps for volume DetAQTB1 ... OK! 
+BLCMDvirtualdetector::Construct DetAQTB1 parent= relZ=1802.2 globZ=1379.7
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with mother volume !
+          Overlap is detected for volume QTB12
+          with its mother volume QTB12
+          at mother local point (-15.8669,-28.779,-237.52), overlapping by at least: 20 um 
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+Checking overlaps for volume QTB12 ... Checking overlaps for volume QTB12 ... OK! 
+BLCMDgenericquad::Construct QTB12 parent= relZ=2065.5 globZ=2065.5
+Checking overlaps for volume DetAQTB2 ... OK! 
+BLCMDvirtualdetector::Construct DetAQTB2 parent= relZ=2753.8 globZ=2108.0
+Checking overlaps for volume HJaw ... OK! 
+BLCMDbox::Construct HJaw parent= relZ=6739.6 globZ=6739.6
+	zmin=6689.6 zmax=6789.6
+Checking overlaps for volume HJaw ... OK! 
+BLCMDbox::Construct HJaw parent= relZ=6487.0 globZ=6487.0
+	zmin=6437.0 zmax=6537.0
+Checking overlaps for volume VJaw ... OK! 
+BLCMDbox::Construct VJaw parent= relZ=6613.3 globZ=6613.3
+	zmin=6563.3 zmax=6663.3
+Checking overlaps for volume VJaw ... OK! 
+BLCMDbox::Construct VJaw parent= relZ=6613.3 globZ=6613.3
+	zmin=6563.3 zmax=6663.3
+Checking overlaps for volume SHEILD_A ... OK! 
+BLCMDtubs::Construct SHEILD_A parent= relZ=3318.8 globZ=3318.8
+	zmin=-815.2 zmax=7452.8 kill=1
+Checking overlaps for volume Det1 ... OK! 
+BLCMDvirtualdetector::Construct Det1 parent= relZ=6765.3 globZ=5178.3
+Checking overlaps for volume SHIELD ... OK! 
+BLCMDtubs::Construct SHIELD parent= relZ=7395.7 globZ=7395.7
+	zmin=6920.7 zmax=7870.7 kill=1
+BLMappedMagnet::Construct ASM1 parent= relZ=7395.7
+Checking overlaps for volume sheild_bend ... OK! 
+BLCMDtubs::Construct sheild_bend parent= relZ=7629.4 globZ=7629.4
+	zmin=5629.4 zmax=9629.4 kill=1
+Checking overlaps for volume Det2 ... OK! 
+BLCMDvirtualdetector::Construct Det2 parent= relZ=7533.7 globZ=-5075.5
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with mother volume !
+          Overlap is detected for volume QSL11
+          with its mother volume QSL11
+          at mother local point (16.1979,122.792,-295.02), overlapping by at least: 20 um 
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+Checking overlaps for volume QSL11 ... Checking overlaps for volume QSL11 ... OK! 
+BLCMDgenericquad::Construct QSL11 parent= relZ=7326.7 globZ=7326.7
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with mother volume !
+          Overlap is detected for volume QSL12
+          with its mother volume QSL12
+          at mother local point (-20.1782,-111.035,295.02), overlapping by at least: 20 um 
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+Checking overlaps for volume QSL12 ... Checking overlaps for volume QSL12 ... OK! 
+BLCMDgenericquad::Construct QSL12 parent= relZ=7235.1 globZ=7235.1
+Checking overlaps for volume Collimator ... OK! 
+BLCMDbox::Construct Collimator parent= relZ=7284.3 globZ=7284.3
+	zmin=7259.3 zmax=7309.3
+Checking overlaps for volume Collimator ... OK! 
+BLCMDbox::Construct Collimator parent= relZ=6877.8 globZ=6877.8
+	zmin=6852.8 zmax=6902.8
+Checking overlaps for volume Det3 ... OK! 
+BLCMDvirtualdetector::Construct Det3 parent= relZ=7061.5 globZ=-8569.9
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with mother volume !
+          Overlap is detected for volume QSL13
+          with its mother volume QSL13
+          at mother local point (-3.61217,142.622,295.02), overlapping by at least: 20 um 
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+Checking overlaps for volume QSL13 ... Checking overlaps for volume QSL13 ... OK! 
+BLCMDgenericquad::Construct QSL13 parent= relZ=6958.4 globZ=6958.4
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with mother volume !
+          Overlap is detected for volume QSL14
+          with its mother volume QSL14
+          at mother local point (-11.2481,-99.5279,-295.02), overlapping by at least: 20 um 
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+Checking overlaps for volume QSL14 ... Checking overlaps for volume QSL14 ... OK! 
+BLCMDgenericquad::Construct QSL14 parent= relZ=6866.7 globZ=6866.7
+Checking overlaps for volume Det4 ... OK! 
+BLCMDvirtualdetector::Construct Det4 parent= relZ=6661.0 globZ=-11533.6
+Checking overlaps for volume SHIELD_B ... OK! 
+BLCMDtubs::Construct SHIELD_B parent= relZ=7099.7 globZ=7099.7
+	zmin=3708.7 zmax=10490.7 kill=1
+BLMappedMagnet::Construct ASM2 parent= relZ=6324.6
+Checking overlaps for volume Det5 ... OK! 
+BLCMDvirtualdetector::Construct Det5 parent= relZ=5640.9 globZ=-7132.0
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with mother volume !
+          Overlap is detected for volume QSL15
+          with its mother volume QSL15
+          at mother local point (113.386,64.6606,295.02), overlapping by at least: 20 um 
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+Checking overlaps for volume QSL15 ... Checking overlaps for volume QSL15 ... OK! 
+BLCMDgenericquad::Construct QSL15 parent= relZ=4679.7 globZ=4679.7
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with mother volume !
+          Overlap is detected for volume QSL16
+          with its mother volume QSL16
+          at mother local point (10.9203,58.5197,-295.02), overlapping by at least: 20 um 
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+Checking overlaps for volume QSL16 ... Checking overlaps for volume QSL16 ... OK! 
+BLCMDgenericquad::Construct QSL16 parent= relZ=3983.7 globZ=3983.7
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with mother volume !
+          Overlap is detected for volume QSL17
+          with its mother volume QSL17
+          at mother local point (47.6322,-124.227,-295.02), overlapping by at least: 20 um 
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+Checking overlaps for volume QSL17 ... Checking overlaps for volume QSL17 ... OK! 
+BLCMDgenericquad::Construct QSL17 parent= relZ=2369.6 globZ=2369.6
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with mother volume !
+          Overlap is detected for volume QSL18
+          with its mother volume QSL18
+          at mother local point (-0.511909,-56.8446,-295.02), overlapping by at least: 20 um 
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+***    printing: every 10-th occurrence
+**************************************************************************
+Checking overlaps for volume QSL18 ... Checking overlaps for volume QSL18 ... OK! 
+BLCMDgenericquad::Construct QSL18 parent= relZ=1623.1 globZ=1623.1
+Checking overlaps for volume DetTar ... OK! 
+BLCMDvirtualdetector::Construct DetTar parent= relZ=-279.4 globZ=-1364.0
+Checking overlaps for volume SHIELD_TAR ... OK! 
+BLCMDtubs::Construct SHIELD_TAR parent= relZ=-279.4 globZ=-279.4
+	zmin=-2779.4 zmax=2220.6 kill=1
+Checking overlaps for volume DetBC1 ... OK! 
+BLCMDvirtualdetector::Construct DetBC1 parent= relZ=-1766.6 globZ=84.8
+Checking overlaps for volume DetBC2 ... OK! 
+BLCMDvirtualdetector::Construct DetBC2 parent= relZ=-2758.1 globZ=1050.8
+=======================================================================
+======       Pre-compound/De-excitation Physics Parameters     ========
+=======================================================================
+Type of pre-compound inverse x-section              3
+Type of de-excitation inverse x-section             3
+Min excitation energy (keV)                         0.1
+Level density (1/MeV)                               0.1
+Time limit for long lived isomeres (ns)             1e+07
+Correlated gamma emission flag                      0
+=======================================================================
+/home/priyaroy/Geant4Data/G4NDL4.5
+@@@ G4ParticleHPInelastic instantiated for particle neutron data directory variable is G4NEUTRONHPDATA pointing to /home/priyaroy/Geant4Data/G4NDL4.5/Inelastic
+@@@ G4ParticleHPInelasticData instantiated for particle neutron data directory variable is G4NEUTRONHPDATA pointing to /home/priyaroy/Geant4Data/G4NDL4.5
+NeutronHP: /Capture file for Z = 6, A = 12 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Capture/CrossSection/6_nat_Carbon
+NeutronHP: /Elastic file for Z = 6, A = 12 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Elastic/CrossSection/6_nat_Carbon
+NeutronHP: /Inelastic file for Z = 6, A = 12 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Inelastic/CrossSection/6_nat_Carbon
+NeutronHP: /Capture file for Z = 6, A = 13 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Capture/CrossSection/6_nat_Carbon
+NeutronHP: /Elastic file for Z = 6, A = 13 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Elastic/CrossSection/6_nat_Carbon
+NeutronHP: /Inelastic file for Z = 6, A = 13 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Inelastic/CrossSection/6_nat_Carbon
+NeutronHP: /Capture file for Z = 8, A = 18 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Capture/CrossSection/8_17_Oxygen
+NeutronHP: /Elastic file for Z = 8, A = 18 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Elastic/CrossSection/8_17_Oxygen
+NeutronHP: /Inelastic file for Z = 8, A = 18 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Inelastic/CrossSection/8_17_Oxygen
+**************************************************************************
+*** G4Exception: Possible wrong format
+***    severity: Warning
+***   issued by: BLTrackFile input
+*** description: Assumed OK
+**************************************************************************
+
+Geometry test nPoints=100 tolerance=0.002 mm:
+Testing geometry for children of group 'World':
+Total geometry errors = 0  0 seconds
+
+================== Prepare Tracking Beam ==================
+Stochastic processes are enabled.
+**************************************************************************
+*** G4Exception: Physics process disabled
+***    severity: Warning
+***   issued by: physics
+*** description: Decay
+**************************************************************************
+================== Begin Tracking Beam ===============
+NeutronHP: /Capture file for Z = 6, A = 12 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Capture/CrossSection/6_nat_Carbon
+NeutronHP: /Elastic file for Z = 6, A = 12 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Elastic/CrossSection/6_nat_Carbon
+NeutronHP: /Inelastic file for Z = 6, A = 12 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Inelastic/CrossSection/6_nat_Carbon
+NeutronHP: /Capture file for Z = 6, A = 13 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Capture/CrossSection/6_nat_Carbon
+NeutronHP: /Elastic file for Z = 6, A = 13 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Elastic/CrossSection/6_nat_Carbon
+NeutronHP: /Inelastic file for Z = 6, A = 13 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Inelastic/CrossSection/6_nat_Carbon
+NeutronHP: /Capture file for Z = 8, A = 18 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Capture/CrossSection/8_17_Oxygen
+NeutronHP: /Elastic file for Z = 8, A = 18 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Elastic/CrossSection/8_17_Oxygen
+NeutronHP: /Inelastic file for Z = 8, A = 18 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Inelastic/CrossSection/8_17_Oxygen
+NeutronHP: /Elastic file for Z = 6, A = 12 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Elastic/CrossSection/6_nat_Carbon
+NeutronHP: /Elastic file for Z = 6, A = 13 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Elastic/CrossSection/6_nat_Carbon
+NeutronHP: /Elastic file for Z = 8, A = 18 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Elastic/CrossSection/8_17_Oxygen
+@@@ G4ParticleHPInelastic instantiated for particle neutron data directory variable is G4NEUTRONHPDATA pointing to /home/priyaroy/Geant4Data/G4NDL4.5/Inelastic
+NeutronHP: /Capture file for Z = 6, A = 12 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Capture/CrossSection/6_nat_Carbon
+NeutronHP: /Capture file for Z = 6, A = 13 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Capture/CrossSection/6_nat_Carbon
+NeutronHP: /Capture file for Z = 8, A = 18 is not found and NeutronHP will use /home/priyaroy/Geant4Data/G4NDL4.5/Capture/CrossSection/8_17_Oxygen
+fieldVoxels: nx=63 ny=2 nz=37, 4662 voxels, 13 fields
+fieldVoxels: max field count is 3 fields, # voxels >5: 0, >10: 0, >20: 0
+Event 1 Completed  1 events  realTime=1 sec  1.0 ev/sec
+Event 2 Completed  2 events  realTime=1 sec  2.0 ev/sec
+Event 3 Completed  3 events  realTime=1 sec  3.0 ev/sec
+Event 4 Completed  4 events  realTime=1 sec  4.0 ev/sec
+Event 5 Completed  5 events  realTime=1 sec  5.0 ev/sec
+Event 6 Completed  6 events  realTime=1 sec  6.0 ev/sec
+Event 7 Completed  7 events  realTime=1 sec  7.0 ev/sec
+Event 8 Completed  8 events  realTime=1 sec  8.0 ev/sec
+Event 9 Completed  9 events  realTime=1 sec  9.0 ev/sec
+Event 10 Completed  10 events  realTime=1 sec  10.0 ev/sec
+Event 20 Completed  20 events  realTime=1 sec  20.0 ev/sec
+Event 30 Completed  30 events  realTime=1 sec  30.0 ev/sec
+Event 40 Completed  40 events  realTime=1 sec  40.0 ev/sec
+Event 50 Completed  50 events  realTime=1 sec  50.0 ev/sec
+Event 60 Completed  60 events  realTime=1 sec  60.0 ev/sec
+Event 70 Completed  70 events  realTime=1 sec  70.0 ev/sec
+Event 80 Completed  80 events  realTime=1 sec  80.0 ev/sec
+Event 90 Completed  90 events  realTime=1 sec  90.0 ev/sec
+Event 100 Completed  100 events  realTime=1 sec  100.0 ev/sec
+Event 200 Completed  200 events  realTime=1 sec  200.0 ev/sec
+Event 300 Completed  300 events  realTime=1 sec  300.0 ev/sec
+Event 400 Completed  400 events  realTime=1 sec  400.0 ev/sec
+Event 500 Completed  500 events  realTime=1 sec  500.0 ev/sec
+Event 600 Completed  600 events  realTime=1 sec  600.0 ev/sec
+Event 700 Completed  700 events  realTime=1 sec  700.0 ev/sec
+Event 800 Completed  800 events  realTime=1 sec  800.0 ev/sec
+Event 900 Completed  900 events  realTime=1 sec  900.0 ev/sec
+Event 1000 Completed  1000 events  realTime=1 sec  1000.0 ev/sec
+**************************************************************************
+*** G4Exception: GeomField1001
+***    severity: Warning
+***   issued by: G4MagInt_Driver::AccurateAdvance()
+*** description: Proposed step is zero; hstep = 0 !
+***     EventID: 1715     TrackID: 0   mu+  KE=81.49 MeV
+**************************************************************************
+Event 2000 Completed  2000 events  realTime=2 sec  1000.0 ev/sec
+Event 3000 Completed  3000 events  realTime=3 sec  1000.0 ev/sec
+Event 4000 Completed  4000 events  realTime=4 sec  1000.0 ev/sec
+Event 5000 Completed  5000 events  realTime=4 sec  1250.0 ev/sec
+Event 6000 Completed  6000 events  realTime=5 sec  1200.0 ev/sec
+**************************************************************************
+*** G4Exception: GeomField1001
+***    severity: Warning
+***   issued by: G4MagInt_Driver::AccurateAdvance()
+*** description: Proposed step is zero; hstep = 0 !
+***     EventID: 6056     TrackID: 0   mu+  KE=81.44 MeV
+**************************************************************************
+Event 7000 Completed  7000 events  realTime=6 sec  1166.7 ev/sec
+**************************************************************************
+*** G4Exception: GeomField1001
+***    severity: Warning
+***   issued by: G4MagInt_Driver::AccurateAdvance()
+*** description: Proposed step is zero; hstep = 0 !
+***     EventID: 7202     TrackID: 0   mu+  KE=81.21 MeV
+**************************************************************************
+Event 8000 Completed  8000 events  realTime=7 sec  1142.9 ev/sec
+**************************************************************************
+*** G4Exception: GeomField1001
+***    severity: Warning
+***   issued by: G4MagInt_Driver::AccurateAdvance()
+*** description: Proposed step is zero; hstep = 0 !
+***     EventID: 8058     TrackID: 0   mu+  KE=80.28 MeV
+**************************************************************************
+Event 9000 Completed  9000 events  realTime=8 sec  1125.0 ev/sec
+**************************************************************************
+*** G4Exception: GeomField1001
+***    severity: Warning
+***   issued by: G4MagInt_Driver::AccurateAdvance()
+*** description: Proposed step is zero; hstep = 0 !
+***     EventID: 9778     TrackID: 0   mu+  KE=81.83 MeV
+**************************************************************************
+Event 10000 Completed  10000 events  realTime=8 sec  1250.0 ev/sec
+Event 11000 Completed  11000 events  realTime=9 sec  1222.2 ev/sec
+Event 12000 Completed  12000 events  realTime=10 sec  1200.0 ev/sec
+**************************************************************************
+*** G4Exception: GeomField1001
+***    severity: Warning
+***   issued by: G4MagInt_Driver::AccurateAdvance()
+*** description: Proposed step is zero; hstep = 0 !
+***     EventID: 12435     TrackID: 0   mu+  KE=80.24 MeV
+**************************************************************************
+**************************************************************************
+*** G4Exception: GeomField1001
+***    severity: Warning
+***   issued by: G4MagInt_Driver::AccurateAdvance()
+*** description: Proposed step is zero; hstep = 0 !
+***     EventID: 12743     TrackID: 0   mu+  KE=81.1 MeV
+**************************************************************************
+Event 13000 Completed  13000 events  realTime=11 sec  1181.8 ev/sec
+Event 14000 Completed  14000 events  realTime=12 sec  1166.7 ev/sec
+Event 15000 Completed  15000 events  realTime=12 sec  1250.0 ev/sec
+**************************************************************************
+*** G4Exception: GeomField1001
+***    severity: Warning
+***   issued by: G4MagInt_Driver::AccurateAdvance()
+*** description: Proposed step is zero; hstep = 0 !
+***     EventID: 15017     TrackID: 0   mu+  KE=79.58 MeV
+**************************************************************************
+**************************************************************************
+*** G4Exception: GeomField1001
+***    severity: Warning
+***   issued by: G4MagInt_Driver::AccurateAdvance()
+*** description: Proposed step is zero; hstep = 0 !
+***     EventID: 15098     TrackID: 0   mu+  KE=80.3 MeV
+**************************************************************************
+**************************************************************************
+*** G4Exception: GeomField1001
+***    severity: Warning
+***   issued by: G4MagInt_Driver::AccurateAdvance()
+*** description: Proposed step is zero; hstep = 0 !
+***     EventID: 15124     TrackID: 0   mu+  KE=81.12 MeV
+***    printing: every 10-th occurrence
+**************************************************************************
+Event 16000 Completed  16000 events  realTime=13 sec  1230.8 ev/sec
+Event 17000 Completed  17000 events  realTime=14 sec  1214.3 ev/sec
+Event 18000 Completed  18000 events  realTime=15 sec  1200.0 ev/sec
+Event 19000 Completed  19000 events  realTime=16 sec  1187.5 ev/sec
+Event 20000 Completed  20000 events  realTime=17 sec  1176.5 ev/sec
+Event 21000 Completed  21000 events  realTime=17 sec  1235.3 ev/sec
+Event 22000 Completed  22000 events  realTime=18 sec  1222.2 ev/sec
+Event 23000 Completed  23000 events  realTime=19 sec  1210.5 ev/sec
+Event 24000 Completed  24000 events  realTime=20 sec  1200.0 ev/sec
+Event 25000 Completed  25000 events  realTime=21 sec  1190.5 ev/sec
+Event 201 Completed  26000 events  realTime=21 sec  1238.1 ev/sec
+Event 1201 Completed  27000 events  realTime=22 sec  1227.3 ev/sec
+Event 2201 Completed  28000 events  realTime=23 sec  1217.4 ev/sec
+Event 3201 Completed  29000 events  realTime=24 sec  1208.3 ev/sec
+**************************************************************************
+*** G4Exception: GeomField1001
+***    severity: Warning
+***   issued by: G4MagInt_Driver::AccurateAdvance()
+*** description: Proposed step is zero; hstep = 0 !
+***     EventID: 4160     TrackID: 0   mu+  KE=81.97 MeV
+***    printing: every 10-th occurrence
+**************************************************************************
+Event 4201 Completed  30000 events  realTime=25 sec  1200.0 ev/sec
+Event 5201 Completed  31000 events  realTime=26 sec  1192.3 ev/sec
+Event 6201 Completed  32000 events  realTime=26 sec  1230.8 ev/sec
+Event 7201 Completed  33000 events  realTime=27 sec  1222.2 ev/sec
+Event 8201 Completed  34000 events  realTime=28 sec  1214.3 ev/sec
+Event 9201 Completed  35000 events  realTime=29 sec  1206.9 ev/sec
+Event 10201 Completed  36000 events  realTime=30 sec  1200.0 ev/sec
+Event 11201 Completed  37000 events  realTime=30 sec  1233.3 ev/sec
+Event 181 Completed  38000 events  realTime=31 sec  1225.8 ev/sec
+Event 1181 Completed  39000 events  realTime=32 sec  1218.8 ev/sec
+Event 2181 Completed  40000 events  realTime=33 sec  1212.1 ev/sec
+Event 3181 Completed  41000 events  realTime=34 sec  1205.9 ev/sec
+Event 4181 Completed  42000 events  realTime=35 sec  1200.0 ev/sec
+Event 5181 Completed  43000 events  realTime=35 sec  1228.6 ev/sec
+Event 6181 Completed  44000 events  realTime=36 sec  1222.2 ev/sec
+Event 7181 Completed  45000 events  realTime=37 sec  1216.2 ev/sec
+Event 8181 Completed  46000 events  realTime=38 sec  1210.5 ev/sec
+Event 9181 Completed  47000 events  realTime=38 sec  1236.8 ev/sec
+Event 10181 Completed  48000 events  realTime=39 sec  1230.8 ev/sec
+Event 11181 Completed  49000 events  realTime=40 sec  1225.0 ev/sec
+**************************************************************************
+*** G4Exception: GeomField1001
+***    severity: Warning
+***   issued by: G4MagInt_Driver::AccurateAdvance()
+*** description: Proposed step is zero; hstep = 0 !
+***     EventID: 11307     TrackID: 0   mu+  KE=81.5 MeV
+***    printing: every 10-th occurrence
+**************************************************************************
+Event 12181 Completed  50000 events  realTime=41 sec  1219.5 ev/sec
+Event 13181 Completed  51000 events  realTime=42 sec  1214.3 ev/sec
+Event 14181 Completed  52000 events  realTime=42 sec  1238.1 ev/sec
+Event 15181 Completed  53000 events  realTime=43 sec  1232.6 ev/sec
+Event 16181 Completed  54000 events  realTime=44 sec  1227.3 ev/sec
+Event 17181 Completed  55000 events  realTime=45 sec  1222.2 ev/sec
+Event 18181 Completed  56000 events  realTime=46 sec  1217.4 ev/sec
+Event 19181 Completed  57000 events  realTime=47 sec  1212.8 ev/sec
+Event 20181 Completed  58000 events  realTime=47 sec  1234.0 ev/sec
+Event 21181 Completed  59000 events  realTime=48 sec  1229.2 ev/sec
+Event 22181 Completed  60000 events  realTime=49 sec  1224.5 ev/sec
+Event 23181 Completed  61000 events  realTime=50 sec  1220.0 ev/sec
+Event 24181 Completed  62000 events  realTime=51 sec  1215.7 ev/sec
+Event 25181 Completed  63000 events  realTime=51 sec  1235.3 ev/sec
+Event 250 Completed  64000 events  realTime=52 sec  1230.8 ev/sec
+Event 1250 Completed  65000 events  realTime=53 sec  1226.4 ev/sec
+Event 2250 Completed  66000 events  realTime=54 sec  1222.2 ev/sec
+Event 3250 Completed  67000 events  realTime=55 sec  1218.2 ev/sec
+Event 4250 Completed  68000 events  realTime=55 sec  1236.4 ev/sec
+Event 5250 Completed  69000 events  realTime=56 sec  1232.1 ev/sec
+Event 6250 Completed  70000 events  realTime=57 sec  1228.1 ev/sec
+**************************************************************************
+*** G4Exception: GeomField1001
+***    severity: Warning
+***   issued by: G4MagInt_Driver::AccurateAdvance()
+*** description: Proposed step is zero; hstep = 0 !
+***     EventID: 6941     TrackID: 0   mu+  KE=80.78 MeV
+***    printing: every 10-th occurrence
+**************************************************************************
+Event 7250 Completed  71000 events  realTime=58 sec  1224.1 ev/sec
+Event 8250 Completed  72000 events  realTime=59 sec  1220.3 ev/sec
+Event 9250 Completed  73000 events  realTime=59 sec  1237.3 ev/sec
+Event 10250 Completed  74000 events  realTime=60 sec  1233.3 ev/sec
+Event 11250 Completed  75000 events  realTime=61 sec  1229.5 ev/sec
+Event 12250 Completed  76000 events  realTime=62 sec  1225.8 ev/sec
+Event 13250 Completed  77000 events  realTime=63 sec  1222.2 ev/sec
+Event 14250 Completed  78000 events  realTime=64 sec  1218.8 ev/sec
+Event 15250 Completed  79000 events  realTime=64 sec  1234.4 ev/sec
+Event 16250 Completed  80000 events  realTime=65 sec  1230.8 ev/sec
+Event 17250 Completed  81000 events  realTime=66 sec  1227.3 ev/sec
+Event 18250 Completed  82000 events  realTime=67 sec  1223.9 ev/sec
+Event 19250 Completed  83000 events  realTime=68 sec  1220.6 ev/sec
+Event 20250 Completed  84000 events  realTime=68 sec  1235.3 ev/sec
+Event 21250 Completed  85000 events  realTime=69 sec  1231.9 ev/sec
+Event 22250 Completed  86000 events  realTime=70 sec  1228.6 ev/sec
+Event 23250 Completed  87000 events  realTime=71 sec  1225.4 ev/sec
+Event 24250 Completed  88000 events  realTime=72 sec  1222.2 ev/sec
+Event 25250 Completed  89000 events  realTime=72 sec  1236.1 ev/sec
+Event 295 Completed  90000 events  realTime=73 sec  1232.9 ev/sec
+Event 1295 Completed  91000 events  realTime=74 sec  1229.7 ev/sec
+Event 2295 Completed  92000 events  realTime=75 sec  1226.7 ev/sec
+Event 3295 Completed  93000 events  realTime=76 sec  1223.7 ev/sec
+Event 4295 Completed  94000 events  realTime=77 sec  1220.8 ev/sec
+Event 5295 Completed  95000 events  realTime=77 sec  1233.8 ev/sec
+Event 6295 Completed  96000 events  realTime=78 sec  1230.8 ev/sec
+Event 7295 Completed  97000 events  realTime=79 sec  1227.8 ev/sec
+Event 8295 Completed  98000 events  realTime=80 sec  1225.0 ev/sec
+Event 9295 Completed  99000 events  realTime=81 sec  1222.2 ev/sec
+**************************************************************************
+*** G4Exception: GeomField1001
+***    severity: Warning
+***   issued by: G4MagInt_Driver::AccurateAdvance()
+*** description: Proposed step is zero; hstep = 0 !
+***     EventID: 9395     TrackID: 0   mu+  KE=80.88 MeV
+***    printing: every 10-th occurrence
+**************************************************************************
+Event 10295 Completed  100000 events  realTime=81 sec  1234.6 ev/sec
+Event 11295 Completed  101000 events  realTime=82 sec  1231.7 ev/sec
+Event 12295 Completed  102000 events  realTime=83 sec  1228.9 ev/sec
+Event 13295 Completed  103000 events  realTime=84 sec  1226.2 ev/sec
+Event 14295 Completed  104000 events  realTime=85 sec  1223.5 ev/sec
+Event 15295 Completed  105000 events  realTime=85 sec  1235.3 ev/sec
+Event 16295 Completed  106000 events  realTime=86 sec  1232.6 ev/sec
+Event 17295 Completed  107000 events  realTime=87 sec  1229.9 ev/sec
+Event 18295 Completed  108000 events  realTime=88 sec  1227.3 ev/sec
+Event 19295 Completed  109000 events  realTime=89 sec  1224.7 ev/sec
+Event 20295 Completed  110000 events  realTime=89 sec  1236.0 ev/sec
+Event 21295 Completed  111000 events  realTime=90 sec  1233.3 ev/sec
+Event 22295 Completed  112000 events  realTime=91 sec  1230.8 ev/sec
+Event 23295 Completed  113000 events  realTime=92 sec  1228.3 ev/sec
+Event 24295 Completed  114000 events  realTime=93 sec  1225.8 ev/sec
+Event 25295 Completed  115000 events  realTime=93 sec  1236.6 ev/sec
+Event 395 Completed  116000 events  realTime=94 sec  1234.0 ev/sec
+Event 1395 Completed  117000 events  realTime=95 sec  1231.6 ev/sec
+Event 2395 Completed  118000 events  realTime=96 sec  1229.2 ev/sec
+Event 3395 Completed  119000 events  realTime=97 sec  1226.8 ev/sec
+Event 4395 Completed  120000 events  realTime=97 sec  1237.1 ev/sec
+Event 5395 Completed  121000 events  realTime=98 sec  1234.7 ev/sec
+Event 6395 Completed  122000 events  realTime=99 sec  1232.3 ev/sec
+Event 7395 Completed  123000 events  realTime=100 sec  1230.0 ev/sec
+Event 8395 Completed  124000 events  realTime=101 sec  1227.7 ev/sec
+Event 9395 Completed  125000 events  realTime=102 sec  1225.5 ev/sec
+Event 10395 Completed  126000 events  realTime=102 sec  1235.3 ev/sec
+Event 11395 Completed  127000 events  realTime=103 sec  1233.0 ev/sec
+Event 12395 Completed  128000 events  realTime=104 sec  1230.8 ev/sec
+Event 13395 Completed  129000 events  realTime=105 sec  1228.6 ev/sec
+Event 14395 Completed  130000 events  realTime=106 sec  1226.4 ev/sec
+Event 15395 Completed  131000 events  realTime=106 sec  1235.8 ev/sec
+Event 16395 Completed  132000 events  realTime=107 sec  1233.6 ev/sec
+Event 17395 Completed  133000 events  realTime=108 sec  1231.5 ev/sec
+Event 18395 Completed  134000 events  realTime=109 sec  1229.4 ev/sec
+Event 19395 Completed  135000 events  realTime=110 sec  1227.3 ev/sec
+**************************************************************************
+*** G4Exception: GeomField1001
+***    severity: Warning
+***   issued by: G4MagInt_Driver::AccurateAdvance()
+*** description: Proposed step is zero; hstep = 0 !
+***     EventID: 19543     TrackID: 0   mu+  KE=80.87 MeV
+***    printing: every 10-th occurrence
+**************************************************************************
+Event 20395 Completed  136000 events  realTime=111 sec  1225.2 ev/sec
+Event 21395 Completed  137000 events  realTime=111 sec  1234.2 ev/sec
+Event 22395 Completed  138000 events  realTime=112 sec  1232.1 ev/sec
+Event 23395 Completed  139000 events  realTime=113 sec  1230.1 ev/sec
+Event 24395 Completed  140000 events  realTime=114 sec  1228.1 ev/sec
+Event 25395 Completed  141000 events  realTime=115 sec  1226.1 ev/sec
+Event 506 Completed  142000 events  realTime=115 sec  1234.8 ev/sec
+Event 1506 Completed  143000 events  realTime=116 sec  1232.8 ev/sec
+Event 2506 Completed  144000 events  realTime=117 sec  1230.8 ev/sec
+Event 3506 Completed  145000 events  realTime=118 sec  1228.8 ev/sec
+Event 4506 Completed  146000 events  realTime=119 sec  1226.9 ev/sec
+Event 5506 Completed  147000 events  realTime=119 sec  1235.3 ev/sec
+Event 6506 Completed  148000 events  realTime=120 sec  1233.3 ev/sec
+Event 7506 Completed  149000 events  realTime=121 sec  1231.4 ev/sec
+Event 8506 Completed  150000 events  realTime=122 sec  1229.5 ev/sec
+Event 9506 Completed  151000 events  realTime=123 sec  1227.6 ev/sec
+Event 10506 Completed  152000 events  realTime=124 sec  1225.8 ev/sec
+Event 11506 Completed  153000 events  realTime=124 sec  1233.9 ev/sec
+Event 12506 Completed  154000 events  realTime=125 sec  1232.0 ev/sec
+Event 13506 Completed  155000 events  realTime=126 sec  1230.2 ev/sec
+Event 14506 Completed  156000 events  realTime=127 sec  1228.3 ev/sec
+Event 15506 Completed  157000 events  realTime=128 sec  1226.6 ev/sec
+Event 16506 Completed  158000 events  realTime=129 sec  1224.8 ev/sec
+**************************************************************************
+*** G4Exception: GeomField1001
+***    severity: Warning
+***   issued by: G4MagInt_Driver::AccurateAdvance()
+*** description: Proposed step is zero; hstep = 0 !
+***     EventID: 17172     TrackID: 0   mu+  KE=81.35 MeV
+***    printing: every 10-th occurrence
+**************************************************************************
+Event 17506 Completed  159000 events  realTime=129 sec  1232.6 ev/sec
+Event 18506 Completed  160000 events  realTime=130 sec  1230.8 ev/sec
+Event 19506 Completed  161000 events  realTime=131 sec  1229.0 ev/sec
+Event 20506 Completed  162000 events  realTime=132 sec  1227.3 ev/sec
+Event 21506 Completed  163000 events  realTime=133 sec  1225.6 ev/sec
+Event 22506 Completed  164000 events  realTime=133 sec  1233.1 ev/sec
+Event 23506 Completed  165000 events  realTime=134 sec  1231.3 ev/sec
+Event 24506 Completed  166000 events  realTime=135 sec  1229.6 ev/sec
+Event 25506 Completed  167000 events  realTime=136 sec  1227.9 ev/sec
+Run complete  167495 Events  136 seconds
+NTuple TimeStep               0 entries
+NTuple Det0              167495 entries
+NTuple Det0a             167495 entries
+NTuple DetAQTA1          116021 entries
+NTuple DetAQTB1          116021 entries
+NTuple DetAQTB2          115626 entries
+NTuple Det1               91677 entries
+NTuple Det2               91302 entries
+NTuple Det3               72031 entries
+NTuple Det4               72031 entries
+NTuple Det5               71932 entries
+NTuple DetTar             71808 entries
+NTuple DetBC1             71808 entries
+NTuple DetBC2             71808 entries
+NTuple partOut            71808 entries
+NTuple wrote Root File 'MuSEBeam_mu+_155_1.0.root'
+
+Exceptions: 0 Fatal, 0 Events Aborted, 0 Stuck Tracks (stopped), 91 Warnings
+     78 times: GeomField1001
+     10 times: GeomVol1002
+      1 times: No radius cut
+      1 times: Physics process disabled
+      1 times: Possible wrong format
+g4beamline: simulation complete

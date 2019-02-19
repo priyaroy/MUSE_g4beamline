@@ -1,0 +1,336 @@
+#	pim1.g4bl
+#
+#	Mue4 PSI g4 beam line model for the HIMB project 
+#
+#	author: L. Desorgher
+#       History:
+#        Revised to match Turtle input deck the P Reimer (PER)
+#	 Revised to match Turtle by Priya, Univ. of Michigan (PRoy)
+#        Dipole Fieldmaps revised to match ASM11 and ASM12 to Turtle (PER) 
+
+#####################################################################################
+
+param -unset firstEvent=1
+param -unset nEvents=100000
+param -unset lastEvent=100000
+param -unset beamPart=mu+
+
+##### Define channel momentum
+param -unset pChannel=155
+
+##### Allow the user to specify a different momentum
+param -unset pOffset=1.0
+
+##### For beamline momentum other than 155, we scale current in the magnets
+param scale=$pChannel/155
+
+param -unset map1=ASM1.g4blmap
+param -unset map2=ASM2.g4blmap
+
+##### Add ability to scale magnets sets
+param -unset scaleDipole=1.000295
+param -unset scaleQSL=1
+param -unset scaleQT=1
+
+##### Define output file name and type
+param sepChar="_"
+param file=MuSEBeam_$beamPart$sepChar$pChannel$sepChar$pOffset
+param histoFile=$file.root
+
+##### Overwelming reccomendation was qgsp_bert_hp for physics engine
+param -unset physicsName=QGSP_BERT_HP
+physics $physicsName
+
+param partName=$beamPart
+param tuneP=abs($pChannel)
+param -unset beamAngle=22.5
+param zProdTarget=-958
+param startZ=$zProdTarget
+
+##### convert kG/mm to T/m
+param kGpmm_to_Tpm=100
+
+##### Quad iron shield parameters
+param RIRON=800
+param killInPipe=0
+param pipeColor=0,1,1,0.4
+param killInIron=1
+param ironColor=1,0,0,0.4
+param absorbAllColor=1,1,0,0.05
+param killAllColor=$absorbAllColor
+param -unset killInShield=1
+param shieldColor=$killAllColor
+particlecolor e+=1,1,1 e-=1,1,1 mu+=0,1,1 mu-=0,1,1
+
+##### Track cuts to keep only mu+ 
+trackcuts keep=mu+
+ 
+collective
+param worldMaterial=Vacuum
+param maxstep=10 deltaChord=0.5
+start x=0. y=0. z=0. initialZ=$startZ
+
+##### Adjust centerline to 22 degrees
+cornerarc z=$zProdTarget angle=$beamAngle centerRadius=10
+
+##### Read-in the beam source from ASCII file
+beam ASCII file=g4_in.txt
+
+##### Define virtual detector plane
+param MuSEDetColor=1,0,1,1 
+param MuSEDetLength=15
+param MuSEDetRadius=500
+virtualdetector MuSEDet radius=$MuSEDetRadius length=$MuSEDetLength color=$MuSEDetColor
+
+##### Define QSL quadrupole magnets with rounded + aperture
+param LQSL=590
+param RQSL=120
+genericquad QSL fieldLength=$LQSL coilHalfWidth=50 coilRadius=150 poleTipRadius=125 ironRadius=$RIRON ironLength=$LQSL kill=$killInIron ironColor=$ironColor
+
+##### Define shielding tube
+tubs SHIELD innerRadius=$RIRON*1.1 outerRadius=$RIRON*1.2 kill=$killInShield color=$shieldColor
+
+##### Read-in field for dipoles
+fieldmap ASM1 file=$map1
+fieldmap ASM2 file=$map2
+
+####################
+#  Beam elements
+#####################
+
+place SHIELD z=$startZ-100 length=10 innerRadius=0 outerRadius=$RIRON*1.1 rename=SheildStart
+
+##### Place virtual detector at Production Target location
+place MuSEDet z=$startZ+$MuSEDetLength rename=Det0 
+
+##### Place virtual detector at start of quad QTA11
+place MuSEDet z=-$MuSEDetLength rename=Det0a 
+
+##### Define QTA11 parameters
+param LDRIFT1=0
+param PDRIFT1=$LDRIFT1/2
+
+##### Length magnet in mm
+param LQTA1=324 
+
+##### Radius aperture in mm
+param RQTA1=75.0 
+
+##### QTA11 defocuses mu+ in X. So, gradient should be negative
+param BQTA1=-0.9854*$scale*$scaleQT
+param GradQTA1=$BQTA1/$RQTA1*$kGpmm_to_Tpm 
+
+##### Define QTA11 quadrupole magnet
+param RIRON=500
+genericquad QTA11 fieldLength=$LQTA1 apertureRadius=$RQTA1 gradient=$GradQTA1 ironRadius=$RIRON ironLength=$LQTA1 kill=$killInIron ironColor=$ironColor
+
+##### Place QTA11 at 162 mm wrt. ProdTarget @ -958 mm. 162+958 mm = 1120 mm
+param PQTA1=$LDRIFT1+0.5*$LQTA1 
+place QTA11 z=$PQTA1
+
+##### Place virtual detector between QTA11 and QTB11
+param LDRIFT2=131
+place MuSEDet z=$PQTA1+0.5*$LQTA1+0.5*$LDRIFT2+0.5*$MuSEDetLength rename=DetAQTA1
+
+##### Define QTB11 parameters
+param LDRIFT2=131
+param PDRIFT21=$PQTA1+0.5*$LQTA1+0.5*$LDRIFT2
+param LQTB=475
+param RQTB=115.0
+
+##### Define field gradient for QTB1. It defocuses mu+ in X
+param BQTB1=-1.0894*$scale*$scaleQT
+param GradQTB1=$BQTB1/$RQTB*$kGpmm_to_Tpm
+
+##### Define QTB11 quadrupole magnet
+genericquad QTB11 gradient=$GradQTB1 fieldLength=$LQTB coilHalfWidth=50 coilRadius=150 poleTipRadius=125 ironRadius=$RIRON ironLength=$LQTB kill=$killInIron ironColor=$ironColor
+
+##### Place QTB11 at 692.5 mm wrt. ProdTarget @ -958 mm. 692.5+958 mm = 1650.5 mm
+param PQTB1=$PDRIFT21+0.5*$LDRIFT2+0.5*$LQTB
+place QTB11 z=$PQTB1 
+
+##### Place virtual detector between QTB1 and QTB2
+param LDRIFT20=110
+place MuSEDet z=$PQTB1+0.5*$LQTB+0.5*$LDRIFT20+0.5*$MuSEDetLength rename=DetAQTB1
+
+##### Define QTB12 parameters
+param LDRIFT20=110
+param PDRIFT22=$PQTB1+0.5*$LQTB+0.5*$LDRIFT20
+
+##### Define field gradient for QTB2. It focuses mu+ in X
+param BQTB2=1.1965*$scale*$scaleQT
+param GradBQTB2=$BQTB2/$RQTB*$kGpmm_to_Tpm
+
+##### Define QTB12 quadrupole magnet
+genericquad QTB12 gradient=$GradBQTB2 fieldLength=$LQTB coilHalfWidth=50 coilRadius=150 poleTipRadius=125 ironRadius=$RIRON ironLength=$LQTB kill=$killInIron ironColor=$ironColor
+
+##### Place QTB2 at 1277.5 mm wrt ProdTarget at -958 mm. 1277.5 + 958 mm = 2235.5 mm
+param PQTB2=$PDRIFT22+0.5*$LDRIFT20+0.5*$LQTB
+place QTB12 z=$PQTB2
+
+##### Place virtual detector after QTB2, close to its end
+place MuSEDet z=$PQTB2+0.5*$LQTB+0.5*$MuSEDetLength+500 rename=DetAQTB2
+
+param LDRIFT3=3586
+param PDRIFT3=$PQTB2+0.5*$LQTB+0.5*$LDRIFT3
+param LDRIFT4=1334
+param PDRIFT4=$PDRIFT3+0.5*$LDRIFT3+0.5*$LDRIFT4
+
+place SHIELD rename=SHEILD_A z=$PDRIFT4/2-250 length=$PDRIFT4+2500
+
+##### Place virtual detector before start of dipole ASM11
+place MuSEDet z=6384.0-10-0.5*$MuSEDetLength-2 rename=Det1
+
+#*****************************************************************
+# Change beam angle to 75 deg and place next set of beam elements
+#*****************************************************************
+
+##### Define bending radius, arc, angle parameters
+param ASMAngleDeg=75.
+param ASMAngleRad=$ASMAngleDeg*pi/180.
+param L_center_line_ASM=2.*775.39-20
+param ASMRadius=$L_center_line_ASM/$ASMAngleRad
+
+##### Place cornerarc to bend the beamline
+cornerarc z=$PDRIFT4+0.5*$LDRIFT4 angle=$ASMAngleDeg/2. centerRadius=$ASMRadius radiusCut=$ASMRadius-160
+
+param PASM1=$PDRIFT4+0.5*$LDRIFT4+0.5*$L_center_line_ASM
+place SHIELD length=950 z=$PASM1 innerRadius=3*$RIRON outerRadius=3.1*$RIRON initialPhi=-60 finalPhi=60
+
+##### Define ASM11 dipole current and place the dipole
+### The map is set to 1Tesla so current/intensity gives strength of dipole in Tesla 
+param BASM1=-0.591271616286*155.0/210.0*$scale*$scaleDipole
+place ASM1 z=$PASM1 current=$BASM1
+cornerarc z=$PASM1 angle=$ASMAngleDeg/2. centerRadius=$ASMRadius radiusCut=$ASMRadius-160
+
+place SHIELD rename=sheild_bend z=$PDRIFT4+$L_center_line_ASM length=4000 innerRadius=2.0*$RIRON outerRadius=2.1*$RIRON initialPhi=65 finalPhi=295
+
+param LDRIFT5=1357
+param PDRIFT5=$PASM1+0.5*$L_center_line_ASM+0.5*$LDRIFT5
+param beginCenter=$PASM1+0.5*$L_center_line_ASM
+
+##### Place virtual detector after ASM11, close to its end
+place MuSEDet z=6384.01+$L_center_line_ASM+10+0.5*$MuSEDetLength+100 rename=Det2
+
+##### Define QSL11 parameters
+param BQSL11=-1.2731*$scale*$scaleQSL
+param GradBQSL11=$BQSL11/$RQSL*$kGpmm_to_Tpm
+
+##### Place QSL11 at 9586.8 mm wrt ProdTarget @ -958 mm. 9586.8+958 mm = 10544.8 mm
+param PQSL11=$PDRIFT5+0.5*$LDRIFT5+0.5*$LQSL
+place QSL rename=QSL11 gradient=$GradBQSL11 z=$PQSL11
+
+##### Define QSL12 parameters
+param LDRIFT6=112
+param PDRIFT6=$PQSL11+0.5*$LQSL+0.5*$LDRIFT6
+param BQSL12=0.9086*$scale*$scaleQSL
+param GradBQSL12=$BQSL12/$RQSL*$kGpmm_to_Tpm
+
+##### Place QSL12 at 10288 mm wrt ProdTarget @ -958 mm. 10288+958 mm = 11246 mm
+param PQSL12=$PDRIFT6+0.5*$LDRIFT6+0.5*$LQSL
+place QSL rename=QSL12 gradient=$GradBQSL12 z=$PQSL12
+ 
+param LDRIFT7=1018-0.5*$MuSEDetLength
+param PDRIFT7=$PQSL12+0.5*$LQSL+0.5*$LDRIFT7
+
+##### Place virtual detector at IFP. Z=11650 mm wrt. ProdTarget @ -958 mm. 11650+958 mm = 12608 mm
+place MuSEDet z=11650 rename=Det3
+
+##### Define QSL13 parameters
+param LDRIFT8=512
+param PDRIFT8=$PDRIFT7+0.5*$MuSEDetLength+0.5*$LDRIFT7
+param BQSL13=0.9086*$scale*$scaleQSL
+param GradBQSL13=$BQSL13/$RQSL*$kGpmm_to_Tpm
+
+##### Place QSL13 at 12408 mm wrt ProdTarget @ -958 mm. 12408+958 mm = 13366 mm
+param PQSL13=$PDRIFT8+$LDRIFT8+0.5*$LQSL
+place QSL rename=QSL13 gradient=$GradBQSL13 z=$PQSL13
+
+
+##### Define QSL14 parameters
+param LDRIFT9=112
+param PDRIFT9=$PQSL13+0.5*$LQSL+0.5*$LDRIFT9
+param BQSL14=-1.2732*$scale*$scaleQSL
+param GradBQSL14=$BQSL14/$RQSL*$kGpmm_to_Tpm
+
+##### Place QSL14 at 13110 mm wrt. ProdTarget @ -958 mm. 13110+958 mm = 14068 mm
+param PQSL14=$PDRIFT9+0.5*$LDRIFT9+0.5*$LQSL
+place QSL rename=QSL14 gradient=$GradBQSL14 z=$PQSL14
+
+param LDRIFT10=1311
+param PDRIFT10=$PQSL14+0.5*$LQSL+0.5*$LDRIFT10
+
+##### Place virtual detector at start of dipole ASM1
+param PASM2=$PDRIFT10+0.5*$LDRIFT10+0.5*$L_center_line_ASM
+place MuSEDet z=$PASM2-775.39-10-0.5*$MuSEDetLength-2 rename=Det4
+
+#***********************************************************************
+# Change beam angle and place next set of beam elements
+#***********************************************************************
+param endCenter=$PDRIFT10+0.5*$LDRIFT10
+
+place SHIELD rename=SHIELD_B z=($endCenter+$beginCenter)/2.0 length=$endCenter-$beginCenter
+
+##### Place cornerarc to bend the beamline
+cornerarc z=$PDRIFT10+0.5*$LDRIFT10 angle=$ASMAngleDeg/2. centerRadius=$ASMRadius radiusCut=$ASMRadius-160
+
+##### Place dipole magnet ASM12
+### The map is set to 1Tesla so current/intensity gives strength of dipole in Tesla 
+param BASM2=-0.591271616286*155.0/210.0*$scale*$scaleDipole
+place ASM2 z=$PASM2 current=$BASM2  
+cornerarc z=$PASM2 angle=$ASMAngleDeg/2. centerRadius=$ASMRadius radiusCut=$ASMRadius-160
+
+##### Place virtual detector at end of ASM12 
+place MuSEDet z=$PASM2-775.39+$L_center_line_ASM+10+0.5*$MuSEDetLength+2 rename=Det5
+
+##### Define QSL15 parameters
+param LDRIFT11=684
+param BQSL15=0.5440*$scale*$scaleQSL
+param GradBQSL15=$BQSL15/$RQSL*$kGpmm_to_Tpm
+
+##### Place QSL15 at 17246.6 mm wrt. ProdTarget @ -958 mm. 17246.6+958 mm = 18204.6 mm
+param PQSL15=$PASM2+0.5*$L_center_line_ASM+$LDRIFT11+0.5*$LQSL 
+place QSL rename=QSL15 gradient=$GradBQSL15 z=$PQSL15
+
+##### Define QSL16 parameters
+param BQSL16=-0.7506*$scale*$scaleQSL
+param GradBQSL16=$BQSL16/$RQSL*$kGpmm_to_Tpm
+param LDRIFT12=112
+
+##### Place QSL16 at 17948.6 mm wrt. ProdTarget @ -958 mm). 17948.6+958 mm = 18906.6 mm
+param PQSL16=$PQSL15+$LQSL+$LDRIFT12
+place QSL rename=QSL16 gradient=$GradBQSL16 z=$PQSL16
+
+##### Define QSL17 parameters 
+param BQSL17=0.9086*$scale*$scaleQSL
+param GradBQSL17=$BQSL17/$RQSL*$kGpmm_to_Tpm
+param LDRIFT13=1038
+
+##### Place QSL17 at 19576.6 mm wrt ProdTarget @ -958 mm. 19576.6+958 mm = 20534.6 mm
+param PQSL17=$PQSL16+$LQSL+$LDRIFT13
+place QSL rename=QSL17 gradient=$GradBQSL17 z=$PQSL17
+
+##### Define QSL18 parameters 
+param BQSL18=-1.2732*$scale*$scaleQSL
+param GradBQSL18=$BQSL18/$RQSL*$kGpmm_to_Tpm
+param LDRIFT14=163
+
+##### Place QSL18 at 20329.6 mm wrt ProdTarget @ -958 mm. 20329.6+958 mm = 21287.6 mm
+param PQSL18=$PQSL17+$LQSL+$LDRIFT14
+place QSL rename=QSL18 gradient=$GradBQSL18 z=$PQSL18
+
+##### Place virtual detector at PiM1Target (22159.5 mm wrt. ProdTarget@-958 mm). 22159.5+958 mm = 23117.5 mm
+param targetLocation=22159.5
+place MuSEDet z=$targetLocation rename=DetTar
+
+##### Place virtual detector at beam hodoscope before PiM1Target.
+place MuSEDet z=$targetLocation-1000 rename=DetBH
+place SHIELD rename=SHIELD_TAR z=$targetLocation innerRadius=2*$MuSEDetRadius outerRadius=2.1*$MuSEDetRadius length=5000
+
+##### Place virtual detectors (beam counters) after PiM1Target.
+place MuSEDet z=$targetLocation+1500 rename=DetBC1
+
+place MuSEDet z=$targetLocation+2500 rename=DetBC2
+
+##### Write the output file
+ntuple partOut detectors=Det* require=DetTar
