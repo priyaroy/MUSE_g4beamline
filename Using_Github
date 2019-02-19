@@ -1,0 +1,38 @@
+Priyashree Roy
+(Dec 21, 2018)
+
+#### How to add existing project to GitHub using command line####
+
+First create a new repository on your GitHub account. I created a new 
+one called 'machine_learning'. The corresponding url:https://github.com/priyaroy/machine_learning.git
+
+Then, follow instructions on https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/
+
+For me, I did the following:
+
+0) Using terminal, I went to the local directory 'machine_learning' on my laptop. 
+1) Update .gitignore file to ignore big files. E.g., to ignore a folder 'datasets', add 'datasets/' to .gitignore ASCII file. Then enter the following commands
+
+    1a) $git config --global core.excludesfile ~/.gitignore_global
+    1b) $git rm -r --cached . #If the repositry already exists
+ 
+2) $git status
+3) $git add .
+   # Stage the files for commit
+
+3) $git commit -m "first commit"
+   # This prepares them to be pushed to a remote repository.
+
+4a) git remote add origin https://github.com/priyaroy/machine_learning.git
+   #If origin path is not added. Else, skip to step 5)
+
+4b) git remote -V
+   #Verifies the new remote url
+
+5) git push origin master
+   # pushes changes in your local repository on your laptop to the specified url
+   # which correspnds to the remote repo. 
+   # You will be prompted to enter your github username and password. 
+   # username: priyaroy
+   #password: <is a secret>
+
