@@ -1,0 +1,7 @@
+The plots show a qualitative comparison of spatial and angle distributions of pions at the Intermediate focal point (IFP) of the beamline, and at the target region. Pion beam energy is 155 MEV. 
+
+The blue lines show G4beamline simulation predictions.
+
+The red points are from experimental data. 
+
+Conclusion: there is a fairly good qualitative agreement between the simulation and the experimental data. To improve it further, we need realistic modeling of the dipole magnets.  
