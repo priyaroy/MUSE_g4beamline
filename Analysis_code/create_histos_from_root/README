@@ -1,14 +1,27 @@
-Priyashree Roy (Oct 1, 2018):
+Author: Priyashree Roy
+Created in: 2018
 
-This directory contains the code to read the output rootfile 
+This directory contains an analysis software to read the output rootfile 
 containing ntuples from g4beamline simulation and 
 create histograms, canvases etc. The code "analysis.cc" is 
 the main code which calls other subroutines to perform various 
 jobs with the ultimate goal of creating histograms.
 
-To compile: $cd <code_dir>
-            $make clean; make 
+To use the software:
+
+1) Be sure to give the correct path and name of the input rootfile (which is the output rootfile from g4beamline 
+simulation) in 'loadingFiles.cc'. It is specified in the as follows in the code:
+  'MuseFile = new TFile("<path_to_rootfile>/<rootfilename>");'
+  
+2) Be sure to give the correct path and name of the outputfile (which contains the histograms and canvases) in 
+'writeROOT.cc'. It is specified in the as follows in the code:
+  TFile *f_out = new TFile("<path_to_rootfile>/<rootfilename>", "RECREATE");
+
+3) FYI, Histograms are defined in defineHistos.cc and defineHistos.h. They are filled in 'fillHistos.cc'.
+
+4) To compile: $cd <local_directory_where_this _software_is_saved>
+               $make clean; make 
             
-To execute: $./analysis1
+5) To execute: $./analysis1
 
 
