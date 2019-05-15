@@ -1,6 +1,4 @@
 ************************************************************************
-PRoy (4 Oct 2018):
-
 About the input files:
 
 1) MuSEDraw_fromPAul_Reimer_2Sept2018.g4bl is the file I received from Paul Reimer on Sept 2, 2018.
@@ -13,11 +11,21 @@ About the input files:
   c) QSL15 (B) gradient was not defined in the previous version. I added that. 
   
 3) MuSEDraw_new_changes_3Oct2018_adopted_turtle_values.g4bl is an update of the MuSEDraw.g4bl file. In this,
-   I have changed the beam line element positions so that they match the current position values 
+   I changed the beam line element positions so that they matched the current position values 
    (referred to as 'adopted' values by Ron Gilman) used in Turtle. 
    
-4) Not included in the 'input_files' folder is a fieldmap file for the dipole magnets, because the file size 
-   is bigger than 25 MB. Please take this file (ASM.g4blmap) from Paul Reimer or Priyashree Roy.
+4) VERY IMPORTANT: Not included in the 'input_files' folder are the fieldmaps for the dipole magnets, 
+because the file sizes are bigger than 25 MB. Please take these file (ASM1.g4blmap and ASM2.g4blmap) from Paul Reimer.
+
+5) Folder 'Turtle_ASCII_Gems_at_IFP_NovtoJan2019': The name is self-explanatory. Further 
+details below:
+
+   a) The folder 'GEM@IFP' contains input files with GEMs placed at the IFP,
+   to match the experimental conditions during the summer 2018 beam time. 
+
+
+
+
    
    
    
